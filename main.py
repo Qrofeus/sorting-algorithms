@@ -13,9 +13,9 @@ def timer_decor(func):
         end_time = time.perf_counter()
 
         execution_time = end_time - start_time
-        # Displays the execution time with 4 decimal place precision
+        # Displays the execution time with 8 decimal place precision
         # Increase the precision by change the x value in --> :.xf
-        print(f"Execution time: {execution_time:.5f}s")
+        print(f"Execution time: {execution_time:.10f}s")
         return result
 
     return wrapper_func
@@ -33,8 +33,8 @@ def sorting_function(arr=None):
 
 
 if __name__ == '__main__':
-    array = [range(1_000_000)]
-    repeat = 1000
+    array = [range(1_000_000_000)]
+    repeat = 1_000
     for _ in range(repeat):
         random.shuffle(array)
         sorting_function(arr=array)
