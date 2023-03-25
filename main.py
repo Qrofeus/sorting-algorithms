@@ -2,6 +2,8 @@ import sorts
 import time
 import random
 
+execution_times = []
+
 
 def timer_decor(func):
     def wrapper_func(*args, **kwargs):
@@ -13,28 +15,28 @@ def timer_decor(func):
         end_time = time.perf_counter()
 
         execution_time = end_time - start_time
-        # Displays the execution time with 8 decimal place precision
+        execution_times.append(execution_time)
+
+        # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
         # Increase the precision by change the x value in --> :.xf
-        print(f"Execution time: {execution_time:.10f}s")
+        # print(f"Execution time: {execution_time:.9f}s")
         return result
 
     return wrapper_func
 
 
 @timer_decor
-def sorting_function(arr=None):
+def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
-    if sorts.bubble_sort(arr):
-        # The functions will return the sorted list
-        print("Sort Complete")
-    else:
-        # Or -None- if there is any error in processing
-        print("Sort Failed")
+    sorts.selection_sort(arr=arr)
 
 
 if __name__ == '__main__':
     array = [range(1_000_000_000)]
-    repeat = 1_000
+    repeat = 1_000_000
     for _ in range(repeat):
         random.shuffle(array)
         sorting_function(arr=array)
+    # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
+    # Increase the precision by change the x value in --> :.xf
+    print(f"Average execution time: {sum(execution_times) / repeat:.9f}s")
