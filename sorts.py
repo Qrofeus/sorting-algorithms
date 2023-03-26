@@ -63,6 +63,35 @@ def selection_sort(arr: list = None, reverse: bool = False):
         # Catch all non-exit errors
         return None
 
+
+def insertion_sort(arr: list = None, reverse: bool = False):
+    try:
+        # First element (single element) will be sorted
+        # Therefore start with second element and start comparing backwards
+        for mark_index in range(1, len(arr)):
+            # Copy the value of current element into marked
+            # This allows the elements to the left to take its place when shifted right
+            marked = arr[mark_index]
+            step_index = mark_index - 1
+            # Compare elements to the left until a smaller element is found
+            # Start from step_index reduce by 1 with each iteration until -1 to avoid looping back to end of list
+            if reverse:
+                # For descending order, check for elements until an element larger than marked is reached
+                while step_index >= 0 and marked > arr[step_index]:
+                    arr[step_index + 1] = arr[step_index]
+                    step_index -= 1
+            else:
+                # For descending order, check for elements until an element larger than marked is reached
+                while step_index >= 0 and marked < arr[step_index]:
+                    arr[step_index + 1] = arr[step_index]
+                    step_index -= 1
+            # Place the marked element after the intended element in reached when moving backwards
+            arr[step_index+1] = marked
+        return arr
+    except:
+        # Catch all non-exit errors
+        return None
+
 # Acknowledgement:
 # Adding the reverse check inside the for loops for iterating over the lists, will result in more comparison checks
 # performed, rather than if two entirely separate code blocks are written for ascending and descending sorts

@@ -28,15 +28,15 @@ def timer_decor(func):
 @timer_decor
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
-    sorts.selection_sort(arr=arr)
+    sorts.insertion_sort(arr=arr)
 
 
 if __name__ == '__main__':
-    array = [range(1_000_000_000)]
-    repeat = 1_000_000
+    array = list(range(1_000))
+    repeat = 1_000
     for _ in range(repeat):
         random.shuffle(array)
         sorting_function(arr=array)
     # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
     # Increase the precision by change the x value in --> :.xf
-    print(f"Average execution time: {sum(execution_times) / repeat:.9f}s")
+    print(f"Average execution time: {sum(execution_times) / repeat:.3f}s")
