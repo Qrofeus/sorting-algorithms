@@ -2,7 +2,7 @@ import sorts
 import time
 import random
 
-execution_times = []
+# execution_times = []
 
 
 def timer_decor(func):
@@ -15,11 +15,11 @@ def timer_decor(func):
         end_time = time.perf_counter()
 
         execution_time = end_time - start_time
-        execution_times.append(execution_time)
+        # execution_times.append(execution_time)
 
         # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
         # Increase the precision by change the x value in --> :.xf
-        # print(f"Execution time: {execution_time:.9f}s")
+        print(f"Execution time: {execution_time:.9f}s")
         return result
 
     return wrapper_func
@@ -28,7 +28,7 @@ def timer_decor(func):
 @timer_decor
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
-    sorts.insertion_sort(arr=arr)
+    sorts.merge_sort(arr=arr)
 
 
 if __name__ == '__main__':
@@ -39,4 +39,4 @@ if __name__ == '__main__':
         sorting_function(arr=array)
     # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
     # Increase the precision by change the x value in --> :.xf
-    print(f"Average execution time: {sum(execution_times) / repeat:.3f}s")
+    # print(f"Average execution time: {sum(execution_times) / repeat:.3f}s")

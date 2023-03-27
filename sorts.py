@@ -65,6 +65,14 @@ def selection_sort(arr: list = None, reverse: bool = False):
 
 
 def insertion_sort(arr: list = None, reverse: bool = False):
+    """
+        Uses insertion-sort algorithm to sort the input list in intended order.
+        Order can be specified using parameter -reverse-
+        Passing boolean True to -reverse- parameter returns the list sorted in descending order
+        :param arr: unsorted list
+        :param reverse: True if descending order is intended, otherwise False
+        :return: list (sorted in intended order), None (for any non-exit errors during execution)
+    """
     try:
         # First element (single element) will be sorted
         # Therefore start with second element and start comparing backwards
@@ -86,7 +94,70 @@ def insertion_sort(arr: list = None, reverse: bool = False):
                     arr[step_index + 1] = arr[step_index]
                     step_index -= 1
             # Place the marked element after the intended element in reached when moving backwards
-            arr[step_index+1] = marked
+            arr[step_index + 1] = marked
+        return arr
+    except:
+        # Catch all non-exit errors
+        return None
+
+
+def merge_sort(arr: list = None, reverse: bool = False):
+    # Merge Sort like other recursive functions, has a possibility to cause an error with memory usage
+    # But that should not be problem with relatively smaller sized lists
+    """
+    Uses merge-sort algorithm to sort the input list in intended order.
+    Order can be specified using parameter -reverse-
+    Passing boolean True to -reverse- parameter returns the list sorted in descending order
+    :param arr: unsorted list
+    :param reverse: True if descending order is intended, otherwise False
+    :return: list (sorted in intended order), None (for any non-exit errors during execution)
+    """
+    try:
+        if len(arr) <= 1:
+            return
+
+        new_end = len(arr) // 2
+
+        # Separate and sort the two halves formed with new_end
+        left_list = arr[:new_end]
+        right_list = arr[new_end:]
+        merge_sort(arr=left_list, reverse=reverse)
+        merge_sort(arr=right_list, reverse=reverse)
+
+        # Merging the two halves
+        # Merging functionality can be separated into a separate function
+        i = j = k = 0
+        # k index will be used for merging into original list
+        while i < len(left_list) and j < len(right_list):
+            # While merging the two lists, check if intended order if descending
+            # change the comparisons performed accordingly
+            if reverse:
+                if left_list[i] >= right_list[j]:
+                    # Using "greater than or equal" preserves original sequence in-case of matching values
+                    arr[k] = left_list[i]
+                    i += 1
+                else:
+                    arr[k] = right_list[j]
+                    j += 1
+            else:
+                if left_list[i] <= right_list[j]:
+                    # Using "less than or equal" preserves original sequence in-case of matching values
+                    arr[k] = left_list[i]
+                    i += 1
+                else:
+                    arr[k] = right_list[j]
+                    j += 1
+            k += 1
+        # Add the remaining elements in left_list or right_list to original after either one runs-out
+        while i < len(left_list):
+            arr[k] = left_list[i]
+            i += 1
+            k += 1
+        while j < len(right_list):
+            arr[k] = right_list[j]
+            j += 1
+            k += 1
+
         return arr
     except:
         # Catch all non-exit errors

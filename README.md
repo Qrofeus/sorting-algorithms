@@ -1,6 +1,7 @@
 # Sorting Algorithms
 
-Python implementations for widely known sorting algorithms. Open the Table of Contents (top-left) for complete list.\
+Python implementations for widely known sorting algorithms. 
+Open the Table-of-Contents (top-left) for complete list of algorithms implemented.\
 I am implementing the sorting algorithms as a part of re-learning and creating a modular source available for future usages.
 
 ## Timing the Sorting algorithms
@@ -9,7 +10,7 @@ For timing the sorting algorithms, run the `main.py` file with your intended alg
 Replace the function call in the decorated function `sorting_function()` with your intended algorithm.
 
 To calculate average overall execution time, find and un-comment the following lines of code in `main.py`
-```
+```python
 --> execution_times = []
 
 def timer_decor(func):
@@ -49,7 +50,6 @@ import sorts
 Call the specific function you wish to use
 
 ```python
-import sorts
 sorts.bubble_sort()
 ```
 
@@ -60,36 +60,45 @@ Each sorting function will take 2 parameters
 2. reverse -> boolean value, set to 'True' if desired output is descending order
 
 ### Bubble Sort:
-```
+```python
 bubble_sort(arr: list = None, reverse: bool = False)
 ```
 Loops through the list, pushing the largest value to the end of the list, by comparing it with each element of the list.
 With each iteration, the number of comparisons shrinks by one.\
-[> Algorithm explanation](/Bubble%20Sort)
+[> Algorithm explanation](/Bubble%20Sort)\
 Average Execution Time: 0.083 seconds
 
 ### Selection Sort:
-```
+```python
 selection_sort(arr: list = None, reverse: bool = False)
 ```
 Selecting first element, compare with the rest to find the minimum value in the list and swap the minimum value with 
 first element. After each iteration, minimum value is placed in front of the unsorted list, number of comparisons 
 shrinking by one each time.\
-[> Algorithm explanation](/Selection%20Sort)
+[> Algorithm explanation](/Selection%20Sort)\
 Average Execution Time: 0.036 seconds
 
 ### Insertion Sort:
-```
+```python
 insertion_sort(arr: list = None, reverse: bool = False)
 ```
-We assume that the first element in list is already sorted then, we select an unsorted element. 
-If the unsorted element is greater than the card in hand, it is placed on the right otherwise, to the left.
-For each following element, we start comparing it with the elements to it's left and place it when the left 
-element is smaller than it. With each iteration, the elements to the left of current element will be in sorted order.\
-[> Algorithm explanation](/Insertion%20Sort)
+We assume that the first element in list is already sorted then, for each following unsorted element, 
+we start comparing it with the elements to it's left and place it when the left element is smaller than it. 
+With each iteration, the elements to the left of current element will be in sorted order.\
+[> Algorithm explanation](/Insertion%20Sort)\
 Average Execution Time: 0.030 seconds
 
 ### Merge Sort:
+
+```python
+merge_sort(arr: list = None, reverse: bool = False)
+```
+The MergeSort function repeatedly divides the array into two halves until we reach a stage where we try to perform 
+MergeSort on a subarray of size 1. After that, the merge function comes into play and combines the sorted arrays into 
+larger arrays until the whole array is merged. With this python implementation, all functionalities necessary for this 
+algorithm are contained in a single function.\
+[> Algorithm Explanation](/Merge%20Sort)\
+Average Execution Time: 0.003 seconds
 
 ### Quicksort:
 
