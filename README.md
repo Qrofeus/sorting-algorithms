@@ -1,7 +1,6 @@
 # Sorting Algorithms
 
-Python implementations for widely known sorting algorithms. 
-Open the Table-of-Contents (top-left) for complete list of algorithms implemented.\
+Python implementations for widely known sorting algorithms. Open the Table-of-Contents (top-left) for complete list of algorithms implemented.\
 I am implementing the sorting algorithms as a part of re-learning and creating a modular source available for future usages.
 
 ## Timing the Sorting algorithms
@@ -25,8 +24,7 @@ I have added average execution times for my machine below, with following parame
 arr = list(range(1_000))
 repeat = 1_000
 ```
-Before every iteration, the list is shuffled using the `random.shuffle(list)` function available in '**random**' module 
-that comes with normal Python3+ installation.\
+Before every iteration, the list is shuffled using the `random.shuffle(list)` function available in '**random**' module that comes with normal Python3+ installation.\
 In case of any errors, check if the imports at the top of the file match the following
 ```python
 import sorts
@@ -40,7 +38,8 @@ import random
 
 ## Using the module
 
-If you need a specific type of sort, copy and paste the specific function(s) from the `sorts.py` file to your code.
+If you need a specific type of sort, copy and paste the specific function(s) from the `sorts.py` file to your code.\
+Some algorithms need more than one function to operate, the necessary functions are listed in code blocks under each algorithm
 
 Or copy the `sorts.py` file to your project directory as a module file to get access to all the implementations.\
 In your project file import the `sorts.py` module
@@ -48,14 +47,13 @@ In your project file import the `sorts.py` module
 import sorts
 ```
 Call the specific function you wish to use
-
 ```python
 sorts.bubble_sort()
 ```
 
 ## Implementations
 
-Each sorting function will take 2 parameters
+Each sorting function will at-least take 2 parameters
 1. arr -> the list of numbers, that is to sorted
 2. reverse -> boolean value, set to 'True' if desired output is descending order
 
@@ -63,8 +61,7 @@ Each sorting function will take 2 parameters
 ```python
 bubble_sort(arr: list = None, reverse: bool = False)
 ```
-Loops through the list, pushing the largest value to the end of the list, by comparing it with each element of the list.
-With each iteration, the number of comparisons shrinks by one.\
+Loops through the list, pushing the largest value to the end of the list, by comparing it with each element of the list. With each iteration, the number of comparisons shrinks by one.\
 [> Algorithm explanation](/Bubble%20Sort)\
 Average Execution Time: 0.083 seconds
 
@@ -72,9 +69,7 @@ Average Execution Time: 0.083 seconds
 ```python
 selection_sort(arr: list = None, reverse: bool = False)
 ```
-Selecting first element, compare with the rest to find the minimum value in the list and swap the minimum value with 
-first element. After each iteration, minimum value is placed in front of the unsorted list, number of comparisons 
-shrinking by one each time.\
+Selecting first element, compare with the rest to find the minimum value in the list and swap the minimum value with first element. After each iteration, minimum value is placed in front of the unsorted list, number of comparisons shrinking by one each time.\
 [> Algorithm explanation](/Selection%20Sort)\
 Average Execution Time: 0.036 seconds
 
@@ -82,25 +77,26 @@ Average Execution Time: 0.036 seconds
 ```python
 insertion_sort(arr: list = None, reverse: bool = False)
 ```
-We assume that the first element in list is already sorted then, for each following unsorted element, 
-we start comparing it with the elements to it's left and place it when the left element is smaller than it. 
-With each iteration, the elements to the left of current element will be in sorted order.\
+We assume that the first element in list is already sorted then, for each following unsorted element, we start comparing it with the elements to it's left and place it when the left element is smaller than it. With each iteration, the elements to the left of current element will be in sorted order.\
 [> Algorithm explanation](/Insertion%20Sort)\
 Average Execution Time: 0.030 seconds
 
 ### Merge Sort:
-
 ```python
 merge_sort(arr: list = None, reverse: bool = False)
 ```
-The MergeSort function repeatedly divides the array into two halves until we reach a stage where we try to perform 
-MergeSort on a subarray of size 1. After that, the merge function comes into play and combines the sorted arrays into 
-larger arrays until the whole array is merged. With this python implementation, all functionalities necessary for this 
-algorithm are contained in a single function.\
+The MergeSort function repeatedly divides the array into two halves until we reach a stage where we try to perform MergeSort on a subarray of size 1. After that, the merge function comes into play and combines the sorted arrays into larger arrays until the whole array is merged. With this python implementation, all functionalities necessary for this algorithm are contained in a single function.\
 [> Algorithm Explanation](/Merge%20Sort)\
 Average Execution Time: 0.003 seconds
 
-### Quicksort:
+### Quick Sort:
+```python
+partition(arr: list = None, reverse: bool = False, start_index: int = 0, end_index: int = None)
+quick_sort(arr: list = None, reverse: bool = False, start_index: int = 0, end_index: int = None)
+```
+The list is divided into two sections by selecting a pivot element from the list. While dividing the list, the pivot element is positioned in such a way that elements less than pivot are kept on the left side and elements greater than pivot are on the right side of the pivot. The left and right sections are also divided using the same approach. This process continues until each subarray contains a single element. At this point the list is sorted. Combine all sections to get sorted list back.\
+[> Algorithm Explanation](/Quick%20Sort)\
+Average Execution Time: 0.029 seconds
 
 ### Counting Sort:
 
@@ -111,3 +107,7 @@ Average Execution Time: 0.003 seconds
 ### Heap Sort:
 
 ### Shell Sort:
+
+## Known Issues:
+
+- None
