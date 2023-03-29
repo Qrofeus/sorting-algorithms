@@ -224,6 +224,50 @@ def quick_sort(arr: list = None, reverse: bool = False, start_index: int = 0, en
 
     return arr
 
+
+def counting_sort(arr: list = None, reverse: bool = False):
+    """
+    Uses counting-sort algorithm to sort the input list in intended order. This sorting algorithm is best used for
+    lists with numerical elements. Order can be specified using parameter -reverse-. Passing boolean True to
+    -reverse- parameter returns the list sorted in descending order
+    :param arr: list - unsorted list
+    :param reverse: bool - True if descending order is intended, otherwise False
+    :return: list - Sorted in intended order, None (for any non-exit errors during execution)
+    """
+    # Find minimum and maximum values in the list
+    # Find range of values using the minimum and maximum values
+    min_value, max_value = min(arr), max(arr)
+    list_range = max_value - min_value + 1
+
+    # This step of finding minimum and maximum values is important when the list does not start with zero
+    # Saving memory of unused indices in counting-list and a few iterations when generating the sorted list
+
+    # Create a count_list of zeros with length equal to the list_range
+    # This list will store the number of times each element appeared in the unsorted list
+    count_list = [0] * list_range
+
+    # Storing the values in count_list will be with respect to min_value
+    for element in arr:
+        # Increment the counter for everytime the element appears
+        count_list[element - min_value] += 1
+
+    # Reset the list 'arr'
+    arr = []
+    # Check for the intended order
+    if not reverse:
+        # For ascending order sorting, iterate through the count_list from left to right
+        for index, value in enumerate(count_list):
+            # Add the elements corresponding to the index values in count_list to the list 'arr'
+            # Repeatedly add the index value for the count associated with that index
+            arr += [(index + min_value)] * value
+    else:
+        # For descending order sorting, iterate through the count_list from left to right
+        for index, value in enumerate(count_list[::-1]):
+            # Add the elements corresponding to the index values in count_list to the list 'arr'
+            # Repeatedly add the index value for the count associated with that index
+            arr += [(max_value - index)] * value
+    return arr
+
 # Acknowledgement:
 # Adding the reverse check inside the for loops for iterating over the lists, will result in more comparison checks
 # performed, rather than if two entirely separate code blocks are written for ascending and descending sorts

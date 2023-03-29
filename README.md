@@ -99,6 +99,12 @@ The list is divided into two sections by selecting a pivot element from the list
 Average Execution Time: 0.029 seconds
 
 ### Counting Sort:
+```python
+counting_sort(arr: list = None, reverse: bool = False)
+```
+After finding the range of values present in the list, create a new counting-list of zeroes with length of list equal to the range of values. Iterating through the unsorted list, increment the value of index in the counting-list, where the index corresponds to the value in unsorted list. To get the sorted list, loop through the counting-list and add the values corresponding to the index as many times as the value for that index in counting-list.\
+[> Algorithm Explanation](/Counting%20Sort)\
+Average Execution Time: 0.000464 seconds
 
 ### Radix Sort:
 

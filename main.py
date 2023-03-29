@@ -29,8 +29,10 @@ def timer_decor(func):
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
     try:
-        sorts.quick_sort(arr=arr)
+        sorts.counting_sort(arr=arr, reverse=True)
     except RecursionError:
+        # Python has a default maximum recursion depth of 1000. If a func exceeds this limit RecursionError is raised.
+        # Although not advised, this limit can be increased using sys.setrecursionlimit(__limit=n) function
         print(RecursionError)
         exit(1)
 
@@ -43,4 +45,4 @@ if __name__ == '__main__':
         sorting_function(arr=array)
     # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
     # Increase the precision by change the x value in --> :.xf
-    # print(f"Average execution time: {sum(execution_times) / repeat:.3f}s")
+    # print(f"Average execution time: {sum(execution_times) / repeat:.6f}s")
