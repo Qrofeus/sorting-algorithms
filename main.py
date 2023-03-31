@@ -2,7 +2,7 @@ import sorts
 import time
 import random
 
-# execution_times = []
+execution_times = []
 
 
 def timer_decor(func):
@@ -15,7 +15,7 @@ def timer_decor(func):
         end_time = time.perf_counter()
 
         execution_time = end_time - start_time
-        # execution_times.append(execution_time)
+        execution_times.append(execution_time)
 
         # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
         # Increase the precision by change the x value in --> :.xf
@@ -29,7 +29,7 @@ def timer_decor(func):
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
     try:
-        sorts.counting_sort(arr=arr, reverse=True)
+        sorts.bucket_sort(arr=arr, reverse=False)
     except RecursionError:
         # Python has a default maximum recursion depth of 1000. If a func exceeds this limit RecursionError is raised.
         # Although not advised, this limit can be increased using sys.setrecursionlimit(__limit=n) function
@@ -37,7 +37,7 @@ def sorting_function(arr: list = None):
         exit(1)
 
 
-if __name__ == '__main__':
+def main():
     array = list(range(1_000))
     repeat = 1_000
     for _ in range(repeat):
@@ -45,4 +45,8 @@ if __name__ == '__main__':
         sorting_function(arr=array)
     # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
     # Increase the precision by change the x value in --> :.xf
-    # print(f"Average execution time: {sum(execution_times) / repeat:.6f}s")
+    print(f"Average execution time: {sum(execution_times) / repeat:.6f}s")
+
+
+if __name__ == '__main__':
+    main()

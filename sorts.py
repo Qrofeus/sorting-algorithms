@@ -1,7 +1,7 @@
 import random
 
 
-def bubble_sort(arr: list = None, reverse: bool = False):
+def bubble_sort(arr: list = None, reverse: bool = False) -> list:
     """
     Uses bubble-sort algorithm to sort the input list in intended order.
     Order can be specified using parameter -reverse-
@@ -27,7 +27,7 @@ def bubble_sort(arr: list = None, reverse: bool = False):
     return arr
 
 
-def selection_sort(arr: list = None, reverse: bool = False):
+def selection_sort(arr: list = None, reverse: bool = False) -> list:
     """
     Uses selection-sort algorithm to sort the input list in intended order.
     Order can be specified using parameter -reverse-
@@ -58,7 +58,7 @@ def selection_sort(arr: list = None, reverse: bool = False):
     return arr
 
 
-def insertion_sort(arr: list = None, reverse: bool = False):
+def insertion_sort(arr: list = None, reverse: bool = False) -> list:
     """
         Uses insertion-sort algorithm to sort the input list in intended order.
         Order can be specified using parameter -reverse-
@@ -91,7 +91,7 @@ def insertion_sort(arr: list = None, reverse: bool = False):
     return arr
 
 
-def merge_sort(arr: list = None, reverse: bool = False):
+def merge_sort(arr: list = None, reverse: bool = False) -> list | None:
     # Merge Sort like other recursive functions, has a possibility to cause an error with memory usage
     # But that should not be problem with relatively smaller sized lists
     # As the function has a merge action, that takes two lists and combines them into a third, using list slices is
@@ -152,7 +152,7 @@ def merge_sort(arr: list = None, reverse: bool = False):
     return arr
 
 
-def partition(arr: list = None, reverse: bool = False, start_index: int = 0, end_index: int = None):
+def partition(arr: list = None, reverse: bool = False, start_index: int = 0, end_index: int = None) -> int:
     """
     This function will select a random element as pivot in the given range for the list, and rearrange the list having
     all elements smaller than the pivot to it's left and all elements larger to it's right.
@@ -191,7 +191,7 @@ def partition(arr: list = None, reverse: bool = False, start_index: int = 0, end
     return pivot_i
 
 
-def quick_sort(arr: list = None, reverse: bool = False, start_index: int = 0, end_index: int = None):
+def quick_sort(arr: list = None, reverse: bool = False, start_index: int = 0, end_index: int = None) -> list | None:
     # Quick Sort like other recursive functions, has a possibility to cause an error with memory usage
     # But that should not be problem with relatively smaller sized lists
     """
@@ -225,7 +225,7 @@ def quick_sort(arr: list = None, reverse: bool = False, start_index: int = 0, en
     return arr
 
 
-def counting_sort(arr: list = None, reverse: bool = False):
+def counting_sort(arr: list = None, reverse: bool = False) -> list:
     """
     Uses counting-sort algorithm to sort the input list in intended order. This sorting algorithm is best used for
     lists with numerical elements. Order can be specified using parameter -reverse-. Passing boolean True to
@@ -267,6 +267,32 @@ def counting_sort(arr: list = None, reverse: bool = False):
             # Repeatedly add the index value for the count associated with that index
             arr += [(max_value - index)] * value
     return arr
+
+
+def bucket_sort(arr: list = None, reverse: bool = False) -> list:
+    bucket_count = 10
+    # Find maximum value in the list, using that find range of values for each bucket
+    max_value = max(arr)
+    bucket_range = max_value / bucket_count
+
+    # Create list of lists to simulate buckets in which the elements of the unsorted list
+    # are stored according to the bucket range calculated above
+    buckets = [[] for _ in range(bucket_count)]
+
+    # Iterate through the unsorted list, placing each element in the appropriate bucket, using the bucket_range
+    for element in arr:
+        bucket_index = int(element // bucket_range)
+        buckets[bucket_index].append(element)
+
+    # Sort the individual buckets using any stable sorting algorithm
+    # Will be using counting_sort for this implementation
+    for i, bucket in enumerate(buckets):
+        buckets[i] = counting_sort(arr=bucket, reverse=reverse)
+
+    # Merge all the buckets and return the sorted list
+    # There are 4 methods to achieve this -
+    # Using nested for loop, Using List comprehension, Using sum() function, Using NumPy module
+    return sum(buckets, [])
 
 # Acknowledgement:
 # Adding the reverse check inside the for loops for iterating over the lists, will result in more comparison checks
