@@ -1,7 +1,7 @@
 import random
 
 
-def bubble_sort(arr: list = None, reverse: bool = False) -> list:
+def bubble_sort(arr: list, reverse: bool = False) -> list:
     """
     Uses bubble-sort algorithm to sort the input list in intended order.
     Order can be specified using parameter -reverse-
@@ -27,7 +27,7 @@ def bubble_sort(arr: list = None, reverse: bool = False) -> list:
     return arr
 
 
-def selection_sort(arr: list = None, reverse: bool = False) -> list:
+def selection_sort(arr: list, reverse: bool = False) -> list:
     """
     Uses selection-sort algorithm to sort the input list in intended order.
     Order can be specified using parameter -reverse-
@@ -36,7 +36,7 @@ def selection_sort(arr: list = None, reverse: bool = False) -> list:
     :param reverse: bool - True if descending order is intended, otherwise False
     :return: list - Sorted in intended order, None (for any non-exit errors during execution)
     """
-    for i in range(len(arr)):
+    for i in range(len(arr) - 1):
         # Assign the first element of the unsorted list as minimum
         # Maximum in case of descending order sort
         target_index = i
@@ -58,7 +58,7 @@ def selection_sort(arr: list = None, reverse: bool = False) -> list:
     return arr
 
 
-def insertion_sort(arr: list = None, reverse: bool = False) -> list:
+def insertion_sort(arr: list, reverse: bool = False) -> list:
     """
         Uses insertion-sort algorithm to sort the input list in intended order.
         Order can be specified using parameter -reverse-
@@ -91,7 +91,7 @@ def insertion_sort(arr: list = None, reverse: bool = False) -> list:
     return arr
 
 
-def merge_sort(arr: list = None, reverse: bool = False) -> list | None:
+def merge_sort(arr: list, reverse: bool = False) -> list | None:
     # Merge Sort like other recursive functions, has a possibility to cause an error with memory usage
     # But that should not be problem with relatively smaller sized lists
     # As the function has a merge action, that takes two lists and combines them into a third, using list slices is
@@ -152,7 +152,7 @@ def merge_sort(arr: list = None, reverse: bool = False) -> list | None:
     return arr
 
 
-def partition(arr: list = None, reverse: bool = False, start_index: int = 0, end_index: int = None) -> int:
+def partition(arr: list, reverse: bool = False, start_index: int = 0, end_index: int = None) -> int:
     """
     This function will select a random element as pivot in the given range for the list, and rearrange the list having
     all elements smaller than the pivot to it's left and all elements larger to it's right.
@@ -191,7 +191,7 @@ def partition(arr: list = None, reverse: bool = False, start_index: int = 0, end
     return pivot_i
 
 
-def quick_sort(arr: list = None, reverse: bool = False, start_index: int = 0, end_index: int = None) -> list | None:
+def quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index: int = None) -> list | None:
     # Quick Sort like other recursive functions, has a possibility to cause an error with memory usage
     # But that should not be problem with relatively smaller sized lists
     """
@@ -225,7 +225,7 @@ def quick_sort(arr: list = None, reverse: bool = False, start_index: int = 0, en
     return arr
 
 
-def counting_sort(arr: list = None, reverse: bool = False) -> list:
+def counting_sort(arr: list, reverse: bool = False) -> list:
     """
     Uses counting-sort algorithm to sort the input list in intended order. This sorting algorithm is best used for
     lists with numerical elements. Order can be specified using parameter -reverse-. Passing boolean True to
@@ -269,7 +269,7 @@ def counting_sort(arr: list = None, reverse: bool = False) -> list:
     return arr
 
 
-def bucket_sort(arr: list = None, reverse: bool = False) -> list:
+def bucket_sort(arr: list, reverse: bool = False) -> list:
     bucket_count = 10
     # Find maximum value in the list, using that find range of values for each bucket
     max_value = max(arr)
