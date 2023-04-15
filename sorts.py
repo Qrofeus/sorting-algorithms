@@ -107,11 +107,11 @@ def merge_sort(arr: list, reverse: bool = False) -> list | None:
     if len(arr) <= 1:
         return
 
-    new_end = len(arr) // 2
+    mid_index = len(arr) // 2
 
     # Separate and sort the two halves formed with new_end
-    left_list = arr[:new_end]
-    right_list = arr[new_end:]
+    left_list = arr[:mid_index]
+    right_list = arr[mid_index:]
     merge_sort(arr=left_list, reverse=reverse)
     merge_sort(arr=right_list, reverse=reverse)
 

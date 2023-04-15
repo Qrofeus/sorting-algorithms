@@ -29,10 +29,9 @@ def timer_decor(func):
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
     try:
-        sorts.bucket_sort(arr=arr, reverse=False)
+        sorts.merge_sort(arr=arr)
     except RecursionError:
-        # Python has a default maximum recursion depth of 1000. If a func exceeds this limit RecursionError is raised.
-        # Although not advised, this limit can be increased using sys.setrecursionlimit(__limit=n) function
+
         print(RecursionError)
         exit(1)
 

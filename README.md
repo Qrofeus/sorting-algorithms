@@ -3,10 +3,31 @@
 Python implementations for widely known sorting algorithms. Open the Table-of-Contents (top-left) for complete list of algorithms implemented.\
 I am implementing the sorting algorithms as a part of re-learning and creating a modular source available for future usages.
 
-## Timing the Sorting algorithms
+## Using the module
 
-For timing the sorting algorithms, run the `main.py` file with your intended algorithm.\
+If you need a specific type of sort, copy and paste the specific function(s) from the `sorts.py` file to your code.\
+Some algorithms need more than one function to operate, the necessary functions are listed in code blocks under each algorithm
+
+Or copy the `sorts.py` file to your project directory as a module file to get access to all the implementations.\
+In your project file import the `sorts.py` module
+```python
+import sorts
+```
+Call the specific function you wish to use
+```python
+sorts.bubble_sort()
+```
+
+## Calculating execution times
+
+For timing the sorting algorithms, run the `main.py` file with your intended algorithm. The execution time required for each list to be sorted using the selected sorting-algorithm, will be printed to the console.\
 Replace the function call in the decorated function `sorting_function()` with your intended algorithm.
+```python
+@timer_decor
+def sorting_function(arr: list = None):
+    try:
+-->     sorts.merge_sort(arr=arr)
+```
 
 To calculate average overall execution time, find and un-comment the following lines of code in `main.py`
 ```python
@@ -34,21 +55,6 @@ import time
 # for time.perf_counter() or time.perf_counter_ns()
 import random
 # for random.shuffle()
-```
-
-## Using the module
-
-If you need a specific type of sort, copy and paste the specific function(s) from the `sorts.py` file to your code.\
-Some algorithms need more than one function to operate, the necessary functions are listed in code blocks under each algorithm
-
-Or copy the `sorts.py` file to your project directory as a module file to get access to all the implementations.\
-In your project file import the `sorts.py` module
-```python
-import sorts
-```
-Call the specific function you wish to use
-```python
-sorts.bubble_sort()
 ```
 
 ## Implementations
@@ -117,10 +123,14 @@ The unsorted list elements are divided into different buckets, based on the rang
 [> Algorithm Explanation](/Bucket%20Sort)\
 Average Execution Time: 0.000671 seconds
 
+### Radix Sort:
+
 ### Heap Sort:
 
 ### Shell Sort:
 
-## Known Issues:
+## Comments:
 
-- None
+- For recursive algorithms, for larger lists there is a chance that during execution, maximum-recursion-depth (in Python) may be reached.
+  - Python has a default maximum-recursion-depth of 1000. If a function exceeds this limit `RecursionError` is raised.
+  - Although not advised, this limit can be increased using `sys.setrecursionlimit(__limit=n)` function.
