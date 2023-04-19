@@ -162,12 +162,14 @@ def partition(arr: list, reverse: bool = False, start_index: int = 0, end_index:
     :param end_index: last index of the range
     :return: int - index of pivot element
     """
-    # partition the list into two sections, with the last element in the list as the pivot point
+    # Choose a random element from the list as pivot_el and swap it with the last element in the list
     pivot_i = random.randint(start_index, end_index)
-    pivot_el = arr[pivot_i]
-    # To avoid worst case scenarios, this pivot_element may be selected randomly, rather than choosing the last element
+    arr[pivot_i], arr[end_index] = arr[end_index], arr[pivot_i]
 
-    # Pointer for greater(ascending)/smaller(descending) element
+    # partition the list into two sections, with the last element in the list as the pivot point
+    pivot_el = arr[end_index]
+
+    # Pointer for greater(descending)/smaller(ascending) element
     i = start_index - 1
 
     # Traverse through all element in the list section, and compare each element with pivot
@@ -186,9 +188,8 @@ def partition(arr: list, reverse: bool = False, start_index: int = 0, end_index:
                 i += 1
                 arr[i], arr[j] = arr[j], arr[i]
     # Swap pivot element with greater/smaller element pointed by 'i'
-    arr[i + 1], arr[pivot_i] = arr[pivot_i], arr[i + 1]
-    pivot_i = i + 1
-    return pivot_i
+    arr[i + 1], arr[end_index] = arr[end_index], arr[i + 1]
+    return i+1
 
 
 def quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index: int = None) -> list | None:
@@ -212,7 +213,7 @@ def quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index
     if not end_index:
         end_index = len(arr) - 1
 
-    if start_index >= end_index:
+    if end_index <= start_index:
         return
 
     # The partition functionality is declared in a separate function, to avoid "maximum recursion depth"

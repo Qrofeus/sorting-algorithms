@@ -29,9 +29,8 @@ def timer_decor(func):
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
     try:
-        sorts.merge_sort(arr=arr)
+        sorts.counting_sort(arr=arr)
     except RecursionError:
-
         print(RecursionError)
         exit(1)
 

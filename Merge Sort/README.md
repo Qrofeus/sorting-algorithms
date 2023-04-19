@@ -79,9 +79,9 @@ def merge_sort(arr: list) -> list | None:
 ## Merge Sort Complexity
 
 1. **Time Complexity**:
-    - Best Case Complexity: `O(n*log n)`
-    - Worst Case Complexity: `O(n*log n)`
-    - Average Case Complexity: `O(n*log n)`
+   - Worst Case Complexity: `O(n*log n)`
+   - Best Case Complexity: `O(n*log n)`
+   - Average Case Complexity: `O(n*log n)`
 2. **Space Complexity**: O(n)
 
 ## Comments
