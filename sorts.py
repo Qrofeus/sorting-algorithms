@@ -269,7 +269,7 @@ def counting_sort(arr: list[int], reverse: bool = False) -> list:
     return arr
 
 
-def bucket_sort(arr: list, reverse: bool = False) -> list:
+def bucket_sort(arr: list[int], reverse: bool = False) -> list:
     """
     Uses bucket-sort algorithm to sort the input list in intended order. Used for lists with numerical elements.
     Order can be specified using parameter -reverse-. Passing boolean True to -reverse- parameter returns the list

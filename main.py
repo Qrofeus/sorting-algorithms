@@ -36,7 +36,7 @@ def sorting_function(arr: list = None):
 
 
 def main():
-    array = list(range(20))
+    array = list(range(1_000))
     repeat = 1_000
     for _ in range(repeat):
         random.shuffle(array)

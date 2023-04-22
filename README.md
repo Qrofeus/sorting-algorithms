@@ -66,7 +66,7 @@ There are 2 parameters that you will need to provide when calling any sorting fu
 Some functions may take parameters other than the 2 mentioned above, but they are optional parameter and need not be passed on when calling any such sorting function. Such parameters, either have default values set in-place or are calculated during execution time.
 
 #
-### [Bubble Sort:](/Bubble%20Sort)
+### [Bubble Sort](/Bubble%20Sort)
 ```python
 bubble_sort(arr: list, reverse: bool = False) -> list
 ```
@@ -74,7 +74,7 @@ Loops through the list, pushing the largest value to the end of the list, by com
 Average Execution Time: 0.075971 seconds
 
 #
-### [Selection Sort:](/Selection%20Sort)
+### [Selection Sort](/Selection%20Sort)
 ```python
 selection_sort(arr: list, reverse: bool = False) -> list
 ```
@@ -82,7 +82,7 @@ Selecting first element, compare with the rest to find the minimum value in the 
 Average Execution Time: 0.032634 seconds
 
 #
-### [Insertion Sort:](/Insertion%20Sort)
+### [Insertion Sort](/Insertion%20Sort)
 ```python
 insertion_sort(arr: list, reverse: bool = False) -> list
 ```
@@ -90,7 +90,7 @@ We assume that the first element in list is already sorted then, for each follow
 Average Execution Time: 0.028675 seconds
 
 #
-### [Merge Sort:](/Merge%20Sort)
+### [Merge Sort](/Merge%20Sort)
 ```python
 merge_sort(arr: list, reverse: bool = False) -> list | None
 ```
@@ -98,7 +98,7 @@ The MergeSort function repeatedly divides the array into two halves until we rea
 Average Execution Time: 0.003393 seconds
 
 #
-### [Quick Sort:](/Quick%20Sort)
+### [Quick Sort](/Quick%20Sort)
 ```python
 partition(arr: list, reverse: bool = False, start_index: int = 0, end_index: int = None) -> int
 quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index: int = None) -> list | None
@@ -107,15 +107,15 @@ The list is divided into two sections by selecting a pivot element from the list
 Average Execution Time: 0.007007 seconds
 
 #
-### [Counting Sort:](/Counting%20Sort)
+### [Counting Sort](/Counting%20Sort)
 ```python
-counting_sort(arr: list, reverse: bool = False) -> list
+counting_sort(arr: list[int], reverse: bool = False) -> list
 ```
 After finding the range of values present in the list, create a new counting-list of zeroes with length of list equal to the range of values. Iterating through the unsorted list, increment the value of index in the counting-list, where the index corresponds to the value in unsorted list. To get the sorted list, loop through the counting-list and add the values corresponding to the index as many times as the value for that index in counting-list.\
 Average Execution Time: 0.000379 seconds
 
 #
-### [Bucket Sort:](/Bucket%20Sort)
+### [Bucket Sort](/Bucket%20Sort)
 ```python
 counting_sort(arr: list, reverse: bool = False) -> list
 bucket_sort(arr: list, reverse: bool = False) -> list
@@ -123,12 +123,13 @@ bucket_sort(arr: list, reverse: bool = False) -> list
 The unsorted list elements are divided into different buckets, based on the range of values assigned to each bucket. In this implementation, each bucket stores 1/10th of the maximum value inside the unsorted list, producing multiple lists of reduced length. Each bucket is then individually sorted using **any** stable sorting algorithm (counting_sort). The buckets are then merged together to return the sorted list.\
 Average Execution Time: 0.000644 seconds
 
-### Radix Sort:
+#
+### [Radix Sort](/Radix%20Sort)
 ```python
-radix_buckets(arr: list[str], unit_place: int, reverse: bool = False) -> list
+radix_counting(arr: list[str], unit_place: int, reverse: bool = False) -> list
 radix_sort(arr: list[int], reverse: bool = False) -> list
 ```
-
+The unsorted list elements are repeated grouped together for individual digits with the same place values. When grouping the elements, the list elements are sorted for the current unit-place using **any** stable sorting algorithm. This implementation uses counting sort to sort the elements for each iteration of the unit-place. The grouping of the elements occurs with unit-places going from right to left (least to most significant digits).\
 Average Execution Time: 0.001208 seconds
 
 [//]: # (### Heap Sort:)
