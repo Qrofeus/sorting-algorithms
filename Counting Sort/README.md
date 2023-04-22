@@ -47,9 +47,9 @@ def counting_sort(arr: list[int]) -> list:
 ## Counting Sort Complexity
 
 1. Time Complexity:
-   1. Worst case complexity: `O(n+k)`
-   2. Best case complexity: `O(n+k)`
-   3. Average case complexity: `O(n+k)`\
+   - Worst case complexity: `O(n+k)`
+   - Best case complexity: `O(n+k)`
+   - Average case complexity: `O(n+k)`\
    The unsorted and `counts` list are traversed once for all cases. Creating the `counts` list, reading-writing to and from the counts list require constant time.
 2. Space Complexity: `O(n)`\
    When using the `offset` implementation, an auxiliary list of only size 'n' is required. For normal implementation, an auxiliary list of size equal to the maximum element in the unsorted list will be required `O(max)`

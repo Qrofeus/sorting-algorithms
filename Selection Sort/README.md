@@ -38,11 +38,11 @@ def selection_sort(arr: list) -> list:
 ## Selection Sort Complexity
 
 1. **Time Complexity:**
-   - Worst Case Complexity: `O(n^2)`\
+   - Worst Case Complexity: `O(n<sup>2</sup>)`\
    If we want to sort in ascending order and the array is in descending order then, the worst case occurs.
-   - Best Case Complexity: `O(n^2)`\
+   - Best Case Complexity: `O(n<sup>2</sup>)`\
    It occurs when the array is already sorted
-   - Average Case Complexity: `O(n^2)`\
+   - Average Case Complexity: `O(n<sup>2</sup>)`\
    It occurs when the elements of the array are in jumbled order (neither ascending nor descending).
 2. **Space Complexity**: `O(1)`
 

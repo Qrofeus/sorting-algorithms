@@ -1,6 +1,10 @@
 import random
 
 
+class NegativeValuesPresent(Exception):
+    pass
+
+
 def bubble_sort(arr: list, reverse: bool = False) -> list:
     """
     Uses bubble-sort algorithm to sort the input list in intended order.
@@ -8,7 +12,7 @@ def bubble_sort(arr: list, reverse: bool = False) -> list:
     Passing boolean True to -reverse- parameter returns the list sorted in descending order
     :param arr: list - unsorted list
     :param reverse: bool - True if descending order is intended, otherwise False
-    :return: list - Sorted in intended order, None (for any non-exit errors during execution)
+    :return: list - Sorted in intended order
     """
     # Access each element in list
     for i in range(len(arr)):
@@ -34,7 +38,7 @@ def selection_sort(arr: list, reverse: bool = False) -> list:
     Passing boolean True to -reverse- parameter returns the list sorted in descending order
     :param arr: list - unsorted list
     :param reverse: bool - True if descending order is intended, otherwise False
-    :return: list - Sorted in intended order, None (for any non-exit errors during execution)
+    :return: list - Sorted in intended order
     """
     for i in range(len(arr) - 1):
         # Assign the first element of the unsorted list as minimum
@@ -65,7 +69,7 @@ def insertion_sort(arr: list, reverse: bool = False) -> list:
         Passing boolean True to -reverse- parameter returns the list sorted in descending order
         :param arr: list - unsorted list
         :param reverse: bool - True if descending order is intended, otherwise False
-        :return: list - Sorted in intended order, None (for any non-exit errors during execution)
+        :return: list - Sorted in intended order
     """
     # First element (single element) will be sorted
     # Therefore start with second element and start comparing backwards
@@ -102,7 +106,7 @@ def merge_sort(arr: list, reverse: bool = False) -> list | None:
     Passing boolean True to -reverse- parameter returns the list sorted in descending order
     :param arr: list - unsorted list
     :param reverse: bool - True if descending order is intended, otherwise False
-    :return: list - Sorted in intended order, None (for any non-exit errors during execution)
+    :return: list - Sorted in intended order
     """
     if len(arr) <= 1:
         return
@@ -189,7 +193,7 @@ def partition(arr: list, reverse: bool = False, start_index: int = 0, end_index:
                 arr[i], arr[j] = arr[j], arr[i]
     # Swap pivot element with greater/smaller element pointed by 'i'
     arr[i + 1], arr[end_index] = arr[end_index], arr[i + 1]
-    return i+1
+    return i + 1
 
 
 def quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index: int = None) -> list | None:
@@ -203,7 +207,7 @@ def quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index
     :param reverse: bool - True if descending order is intended, otherwise False.
     :param start_index: int - first index of list.
     :param end_index: int - last index of list.
-    :return: list - sorted in intended order, None (for any non-exit errors during execution)
+    :return: list - sorted in intended order
     """
     # This Quick sort implementation does not have a merge functionality that merges two sections into a third
     # Therefore using start_index and end_index to sort the list in-place is used
@@ -226,19 +230,19 @@ def quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index
     return arr
 
 
-def counting_sort(arr: list, reverse: bool = False) -> list:
+def counting_sort(arr: list[int], reverse: bool = False) -> list:
     """
-    Uses counting-sort algorithm to sort the input list in intended order. This sorting algorithm is best used for
-    lists with numerical elements. Order can be specified using parameter -reverse-. Passing boolean True to
-    -reverse- parameter returns the list sorted in descending order
+    Uses counting-sort algorithm to sort the input list in intended order. Used for lists with numerical elements.
+    Order can be specified using parameter -reverse-. Passing boolean True to -reverse- parameter returns the list
+    sorted in descending order
     :param arr: list - unsorted list
     :param reverse: bool - True if descending order is intended, otherwise False
-    :return: list - Sorted in intended order, None (for any non-exit errors during execution)
+    :return: list - Sorted in intended order
     """
     # Find minimum and maximum values in the list
     # Find range of values using the minimum and maximum values
-    min_value, max_value = min(arr), max(arr)
-    list_range = max_value - min_value + 1
+    offset, max_value = min(arr), max(arr)
+    list_range = max_value - offset + 1
 
     # This step of finding minimum and maximum values is important when the list does not start with zero
     # Saving memory of unused indices in counting-list and a few iterations when generating the sorted list
@@ -250,31 +254,33 @@ def counting_sort(arr: list, reverse: bool = False) -> list:
     # Storing the values in count_list will be with respect to min_value
     for element in arr:
         # Increment the counter for everytime the element appears
-        count_list[element - min_value] += 1
+        count_list[element - offset] += 1
 
     # Reset the list 'arr'
     arr = []
     # Check for the intended order
-    if not reverse:
-        # For ascending order sorting, iterate through the count_list from left to right
-        for index, value in enumerate(count_list):
-            # Add the elements corresponding to the index values in count_list to the list 'arr'
-            # Repeatedly add the index value for the count associated with that index
-            arr += [(index + min_value)] * value
-    else:
-        # For descending order sorting, iterate through the count_list from left to right
-        for index, value in enumerate(count_list[::-1]):
-            # Add the elements corresponding to the index values in count_list to the list 'arr'
-            # Repeatedly add the index value for the count associated with that index
-            arr += [(max_value - index)] * value
+    # For ascending order sorting, iterate through the count_list from left to right
+    # For descending order sorting, iterate through the count_list from right to left
+    list_iterator = reversed(list(enumerate(count_list))) if reverse else enumerate(count_list)
+    for index, value in list_iterator:
+        # Add the elements corresponding to the index values in count_list to the list 'arr'
+        # Repeatedly add the index value for the count associated with that index
+        arr += [(index + offset)] * value
     return arr
 
 
 def bucket_sort(arr: list, reverse: bool = False) -> list:
+    """
+    Uses bucket-sort algorithm to sort the input list in intended order. Used for lists with numerical elements.
+    Order can be specified using parameter -reverse-. Passing boolean True to -reverse- parameter returns the list
+    sorted in descending order
+    :param arr: list - unsorted list
+    :param reverse: bool - True if descending order is intended, otherwise False
+    :return: list - Sorted in intended order
+    """
     bucket_count = 10
     # Find maximum value in the list, using that find range of values for each bucket
-    max_value = max(arr)
-    bucket_range = max_value / bucket_count
+    bucket_range = max(arr) / bucket_count
 
     # Create list of lists to simulate buckets in which the elements of the unsorted list
     # are stored according to the bucket range calculated above
@@ -294,6 +300,62 @@ def bucket_sort(arr: list, reverse: bool = False) -> list:
     # There are 4 methods to achieve this -
     # Using nested for loop, Using List comprehension, Using sum() function, Using NumPy module
     return sum(buckets, [])
+
+
+def radix_counting(arr: list[str], unit_place: int, reverse: bool = False) -> list:
+    """
+    Separates the elements in to sub-list based on the current unit-place passed through the 'unit_place' parameter.
+    Merges the sub-lists back together in the intended order and returns the list sorted for that unit-place
+    :param arr: list[str] - unsorted list mapped from int to str with leading zeroes
+    :param unit_place: int - current unit-place to be considered from right
+    :param reverse: bool - True if descending order is intended, otherwise False
+    :return: list[str] - sorted for up-till the current unit-place
+    """
+    # Create 10 sub-lists for each of the possible numerical values (0-9)
+    unit_counts = [[] for _ in range(10)]
+
+    # For each element in the list, add that element to the corresponding sub-list
+    # based on the value at the current unit-place
+    for num in arr:
+        unit_counts[int(num[-unit_place])].append(num)
+
+    # When merging the sub-lists check for the intended order, reverse the buckets if intended order is descending order
+    if reverse:
+        unit_counts = unit_counts[::-1]
+
+    # Merge the sub-lists together to get the list sorted for current unit_place
+    arr = [num for bucket in unit_counts for num in bucket]
+    return arr
+
+
+def radix_sort(arr: list[int], reverse: bool = False) -> list:
+    """
+    Uses radix-sort algorithm to sort the input list in intended order. Used for lists with numerical elements.
+    Order can be specified using parameter -reverse-. Passing boolean True to -reverse- parameter returns the list
+    sorted in descending order
+    :param arr: list - unsorted list
+    :param reverse: bool - True if descending order is intended, otherwise False
+    :return: list - Sorted in intended order
+    """
+    # To make sure this algorithm works as intended, the elements inside the list should be positive integers
+    # Integer assertion is done when passing the list as a parameter, and to check for any negative integers,
+    # following check is implemented
+    if any(val < 0 for val in arr):
+        raise NegativeValuesPresent
+
+    # Find the highest unit place of the maximum value in the list
+    units = len(str(max(arr)))
+
+    # Convert all elements in the list to string for ease of operation. Working with int, while possible
+    # will require dividing element in the list with (10^current-unit) each time it is to be used
+    arr = [str(num).zfill(units) for num in arr]
+    # Starting from right rearrange the elements in 10 sub-lists (0-9)
+    for unit in range(1, units+1):
+        arr = radix_counting(arr=arr, unit_place=unit, reverse=reverse)
+
+    # Convert the list back to int values
+    arr = list(map(int, arr))
+    return arr
 
 # Acknowledgement:
 # Adding the reverse check inside the for loops for iterating over the lists, will result in more comparison checks

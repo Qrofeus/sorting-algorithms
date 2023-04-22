@@ -67,7 +67,7 @@ def quick_sort(arr: list, start_index: int = 0, end_index: int = None) -> list |
 ## Quick Sort Complexity
 
 1. Time Complexity:
-   - Worst Case Complexity: `O(n^2)`\
+   - Worst Case Complexity: `O(n<sup>2</sup>)`\
    It occurs when the pivot element picked is either the greatest or the smallest element.
    - Best Case Complexity: `O(n*log n)`\
    It occurs when the pivot element is always the middle element or near to the middle element (in the sorted list).
