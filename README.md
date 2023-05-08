@@ -117,8 +117,8 @@ Average Execution Time: 0.000379 seconds
 #
 ### [Bucket Sort](/Bucket%20Sort)
 ```python
-counting_sort(arr: list, reverse: bool = False) -> list
-bucket_sort(arr: list, reverse: bool = False) -> list
+counting_sort(arr: list[int], reverse: bool = False) -> list
+bucket_sort(arr: list[int], reverse: bool = False) -> list
 ```
 The unsorted list elements are divided into different buckets, based on the range of values assigned to each bucket. In this implementation, each bucket stores 1/10th of the maximum value inside the unsorted list, producing multiple lists of reduced length. Each bucket is then individually sorted using **any** stable sorting algorithm (counting_sort). The buckets are then merged together to return the sorted list.\
 Average Execution Time: 0.000644 seconds
