@@ -65,6 +65,8 @@ There are 2 parameters that you will need to provide when calling any sorting fu
 
 Some functions may take parameters other than the 2 mentioned above, but they are optional parameter and need not be passed on when calling any such sorting function. Such parameters, either have default values set in-place or are calculated during execution time.
 
+_Click on the titles for explanation of the sorting algorithm_
+
 #
 ### [Bubble Sort](/Bubble%20Sort)
 ```python
@@ -142,3 +144,5 @@ Average Execution Time: 0.001208 seconds
 - For recursive algorithms, for larger lists there is a chance that during execution, maximum-recursion-depth (in Python) may be reached.
   - Python has a default maximum-recursion-depth of 1000. If a function exceeds this limit `RecursionError` is raised.
   - Although not advised, this limit can be increased using `sys.setrecursionlimit(__limit=n)` function.
+- Python works with references when passing data structures as parameters to a function. Therefore, the implementations of the sorting algorithms work as in-place sorting functions. Despite that, all the sorting functions in this implementation return the sorted list explicitly (to be used if ever needed).
+  - If you intend to stop Python from modifying the original list, when passing the list as a parameter to the sorting function use `copy.deepcopy(arr)` function. [Python Documentation](https://docs.python.org/3/library/copy.html)
