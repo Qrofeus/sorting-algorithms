@@ -1,11 +1,12 @@
-import sorting_algorithms
+from sorting_algorithms import SORTS
 import pygame
 import random
 
 # Constants
-WIDTH = 500
+WIDTH = 1000
 HEIGHT = 300
 MAX_LENGTH = 100
+MIN_WAIT, MAX_WAIT = 1, 100
 COLORS = {
     "background": (35, 35, 40),
     "regular": (255, 248, 240),
@@ -13,9 +14,6 @@ COLORS = {
     "highlight_2": (255, 209, 102),
     "highlight_3": (17, 138, 178),
     "sorted": (6, 214, 160)
-}
-SORTS = {
-    "Bubble Sort": sorting_algorithms.bubble_sort
 }
 
 
@@ -72,8 +70,7 @@ def animate_sort(algorithm: str):
     4. Left (arrow key) -> Slow down animation
     5. Right (arrow key) -> Speed up animation
     """
-    algorithm = algorithm.title()
-    wait_time = 20
+    wait_time = 50
 
     # Initialize PyGame
     pygame.init()
@@ -116,10 +113,10 @@ def animate_sort(algorithm: str):
             if event.type == pygame.KEYDOWN:
                 # Left arrow to decrease speed(increase WAIT_TIME)
                 if event.key == pygame.K_LEFT:
-                    wait_time = min(100, wait_time + 5)
+                    wait_time = min(MAX_WAIT, wait_time + 10)
                 # Right arrow to increase speed(decrease WAIT_TIME)
                 if event.key == pygame.K_RIGHT:
-                    wait_time = max(1, wait_time - 5)
+                    wait_time = max(MIN_WAIT, wait_time - 10)
                 # Space-bar to pause animation
                 if event.key == pygame.K_SPACE:
                     pause = not pause
