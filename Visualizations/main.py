@@ -7,7 +7,9 @@ def main():
     # 2. Bogo Sort
     # 3. Exchange Sort
     # 4. Brick Sort
-    animate_sort("Brick Sort")
+    # 5. Comb Sort
+    # 6. Cocktail Sort
+    animate_sort("Cocktail Sort")
 
 
 if __name__ == '__main__':

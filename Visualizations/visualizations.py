@@ -3,7 +3,7 @@ import pygame
 import random
 
 # Constants
-WIDTH = 1000
+WIDTH = 500
 HEIGHT = 300
 MAX_LENGTH = 100
 MIN_WAIT, MAX_WAIT = 1, 100
@@ -70,6 +70,9 @@ def animate_sort(algorithm: str):
     4. Left (arrow key) -> Slow down animation
     5. Right (arrow key) -> Speed up animation
     """
+    if algorithm not in SORTS.keys():
+        print(">> Invalid algorithm name...")
+        exit()
     wait_time = 50
 
     # Initialize PyGame
