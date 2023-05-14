@@ -9,7 +9,10 @@ def main():
     # 4. Brick Sort
     # 5. Comb Sort
     # 6. Cocktail Sort
-    animate_sort("Cocktail Sort")
+    # 7. Gnome Sort
+    # 8. Insertion Sort
+    # 9. Selection Sort
+    animate_sort("Selection Sort")
 
 
 if __name__ == '__main__':

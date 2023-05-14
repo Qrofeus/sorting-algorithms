@@ -71,21 +71,55 @@ def cocktail_sort(arr: list):
         # Forward pass
         swapped = False
         for i in range(start, end):
-            if arr[i] > arr[i+1]:
-                arr[i], arr[i+1] = arr[i+1], arr[i]
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
                 swapped = True
-                yield arr, [i+1], list(range(start)), list(range(end+1, size))
+                yield arr, [i + 1], list(range(start)), list(range(end + 1, size))
         if not swapped:
             break
         end -= 1
         # Backward pass
         swapped = False
-        for i in range(end-1, start-1, -1):
-            if arr[i] > arr[i+1]:
-                arr[i], arr[i+1] = arr[i+1], arr[i]
+        for i in range(end - 1, start - 1, -1):
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
                 swapped = True
-                yield arr, [i], list(range(start)), list(range(end+1, size))
+                yield arr, [i], list(range(start)), list(range(end + 1, size))
         start += 1
+
+
+def gnome_sort(arr: list):
+    i, size = 0, len(arr)
+    while i < size:
+        if i == 0 or arr[i] > arr[i - 1]:
+            yield arr, [i], [], []
+            i += 1
+        else:
+            arr[i], arr[i - 1] = arr[i - 1], arr[i]
+            yield arr, [], [i - 1], []
+            i -= 1
+
+
+def insertion_sort(arr: list):
+    for i in range(1, len(arr)):
+        current = arr[i]
+        j = i
+        while j > 0 and current < arr[j - 1]:
+            yield arr, [i], [j], []
+            arr[j] = arr[j - 1]
+            j -= 1
+        arr[j] = current
+        yield arr, [i], [], [j]
+
+
+def selection_sort(arr: list):
+    for i in range(len(arr)-1):
+        min_index = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[min_index]:
+                min_index = j
+            yield arr, [min_index], [j], list(range(i))
+        arr[i], arr[min_index] = arr[min_index], arr[i]
 
 
 SORTS = {
@@ -94,5 +128,8 @@ SORTS = {
     "Exchange Sort": exchange_sort,
     "Brick Sort": brick_sort,
     "Comb Sort": comb_sort,
-    "Cocktail Sort": cocktail_sort
+    "Cocktail Sort": cocktail_sort,
+    "Gnome Sort": gnome_sort,
+    "Insertion Sort": insertion_sort,
+    "Selection Sort": selection_sort
 }
