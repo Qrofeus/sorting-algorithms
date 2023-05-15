@@ -11,8 +11,10 @@ def main():
     # 6. Cocktail Sort
     # 7. Gnome Sort
     # 8. Insertion Sort
-    # 9. Selection Sort
-    animate_sort("Selection Sort")
+    # 9. Binary Insertion Sort
+    # 10. Selection Sort
+    # 11. Heap Sort
+    animate_sort("Binary Insertion Sort")
 
 
 if __name__ == '__main__':

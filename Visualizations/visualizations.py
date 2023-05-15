@@ -73,7 +73,7 @@ def animate_sort(algorithm: str):
     if algorithm not in SORTS.keys():
         print(">> Invalid algorithm name...")
         exit()
-    wait_time = 50
+    wait_time = 100
 
     # Initialize PyGame
     pygame.init()

@@ -113,13 +113,43 @@ def insertion_sort(arr: list):
 
 
 def selection_sort(arr: list):
-    for i in range(len(arr)-1):
+    for i in range(len(arr) - 1):
         min_index = i
-        for j in range(i+1, len(arr)):
+        for j in range(i + 1, len(arr)):
             if arr[j] < arr[min_index]:
                 min_index = j
             yield arr, [min_index], [j], list(range(i))
         arr[i], arr[min_index] = arr[min_index], arr[i]
+
+
+def find_pos_binary(arr: list, key: int, start: int, end: int):
+    if start == end:
+        if arr[start] > key:
+            return start
+        else:
+            return start+1
+    elif start > end:
+        return start
+
+    mid = (start + end) // 2
+    if arr[mid] < key:
+        return find_pos_binary(arr, key, mid+1, end)
+    elif arr[mid] > key:
+        return find_pos_binary(arr, key, start, mid)
+    else:
+        return mid
+
+
+def binary_insertion_sort(arr: list):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        pos = find_pos_binary(arr, key, 0, i-1)
+        yield arr, list(range(i)), [pos], [i]
+        arr = arr[:pos] + [key] + arr[pos:i] + arr[i + 1:]
+
+
+def heap_sort(arr: list):
+    pass
 
 
 SORTS = {
@@ -131,5 +161,7 @@ SORTS = {
     "Cocktail Sort": cocktail_sort,
     "Gnome Sort": gnome_sort,
     "Insertion Sort": insertion_sort,
-    "Selection Sort": selection_sort
+    "Binary Insertion Sort": binary_insertion_sort,
+    "Selection Sort": selection_sort,
+    "Heap Sort": heap_sort
 }
