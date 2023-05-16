@@ -19,7 +19,7 @@ def timer_decor(func):
 
         # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
         # Increase the precision by change the x value in --> :.xf
-        print(f"Execution time: {execution_time:.9f}s")
+        # print(f"Execution time: {execution_time:.9f}s")
         return result
 
     return wrapper_func
@@ -29,13 +29,16 @@ def timer_decor(func):
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
     try:
-        sorts.counting_sort(arr=arr)
+        # print(sorts.heap_sort(arr=arr, reverse=False))
+        sorts.heap_sort_mod(arr=arr)
     except RecursionError:
         print(RecursionError)
         exit(1)
 
 
 def main():
+    # array = list(range(10))
+    # repeat = 10
     array = list(range(1_000))
     repeat = 1_000
     for _ in range(repeat):
@@ -43,7 +46,7 @@ def main():
         sorting_function(arr=array)
     # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
     # Increase the precision by change the x value in --> :.xf
-    print(f"Average execution time: {sum(execution_times) / repeat:.6f}s")
+    print(f"Average execution time: {sum(execution_times) / repeat:.9f}s")
 
 
 if __name__ == '__main__':
