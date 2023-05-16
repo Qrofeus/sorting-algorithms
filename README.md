@@ -134,7 +134,12 @@ radix_sort(arr: list[int], reverse: bool = False) -> list
 The unsorted list elements are repeated grouped together for individual digits with the same place values. When grouping the elements, the list elements are sorted for the current unit-place using **any** stable sorting algorithm. This implementation uses counting sort to sort the elements for each iteration of the unit-place. The grouping of the elements occurs with unit-places going from right to left (least to most significant digits).\
 Average Execution Time: 0.001208 seconds
 
-[//]: # (### Heap Sort:)
+### Heap Sort:
+```python
+
+```
+Considering the unsorted list as a [binary tree](https://www.geeksforgeeks.org/binary-tree-data-structure/), we create a [max-heap](https://www.geeksforgeeks.org/introduction-to-max-heap-data-structure/) from that binary tree. The maximum element from the heap gets placed at the start of the list-representation of that max-heap. Swapping that maximum element with the last element in the unsorted list, cements the correct position for the max element. Repeating this process again and again for the unsorted parts of the list, creates a growing sorted list from maximum to minimum value.\
+Average Execution Time: 0.______ seconds
 
 [//]: # (### Shell Sort:)
 

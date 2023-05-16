@@ -14,7 +14,7 @@ def main():
     # 9. Binary Insertion Sort
     # 10. Selection Sort
     # 11. Heap Sort
-    animate_sort("Binary Insertion Sort")
+    animate_sort("Heap Sort")
 
 
 if __name__ == '__main__':

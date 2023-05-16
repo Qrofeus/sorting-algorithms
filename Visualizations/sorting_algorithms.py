@@ -148,8 +148,32 @@ def binary_insertion_sort(arr: list):
         arr = arr[:pos] + [key] + arr[pos:i] + arr[i + 1:]
 
 
+def heapify(arr: list, end: int, curr: int):
+    largest = curr
+    left = 2 * curr + 1
+    right = 2 * curr + 2
+
+    if left < end and arr[curr] < arr[left]:
+        largest = left
+
+    if right < end and arr[largest] < arr[right]:
+        largest = right
+
+    if largest != curr:
+        yield arr, list(range(end)), [curr], [largest]
+        arr[curr], arr[largest] = arr[largest], arr[curr]
+        yield from heapify(arr, end, largest)
+
+
 def heap_sort(arr: list):
-    pass
+    size = len(arr)
+
+    for i in range(size // 2, -1, -1):
+        yield from heapify(arr, size, i)
+
+    for i in range(size - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        yield from heapify(arr, i, 0)
 
 
 SORTS = {
