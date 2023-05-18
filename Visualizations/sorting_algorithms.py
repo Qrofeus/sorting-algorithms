@@ -127,13 +127,13 @@ def find_pos_binary(arr: list, key: int, start: int, end: int):
         if arr[start] > key:
             return start
         else:
-            return start+1
+            return start + 1
     elif start > end:
         return start
 
     mid = (start + end) // 2
     if arr[mid] < key:
-        return find_pos_binary(arr, key, mid+1, end)
+        return find_pos_binary(arr, key, mid + 1, end)
     elif arr[mid] > key:
         return find_pos_binary(arr, key, start, mid)
     else:
@@ -143,7 +143,7 @@ def find_pos_binary(arr: list, key: int, start: int, end: int):
 def binary_insertion_sort(arr: list):
     for i in range(1, len(arr)):
         key = arr[i]
-        pos = find_pos_binary(arr, key, 0, i-1)
+        pos = find_pos_binary(arr, key, 0, i - 1)
         yield arr, list(range(i)), [pos], [i]
         arr = arr[:pos] + [key] + arr[pos:i] + arr[i + 1:]
 
@@ -176,6 +176,40 @@ def heap_sort(arr: list):
         yield from heapify(arr, i, 0)
 
 
+# def hibbard_gaps(size: int) -> list[int]:
+#     current, gaps = 2, []
+#     while current < size:
+#         gaps.append(current - 1)
+#         current = current * 2
+#
+#     return gaps[::-1]
+
+
+def knuth_gaps(size: int) -> list[int]:
+    i, gaps = 1, []
+    current = ((3 ** i) - 1) // 2
+    while current < size:
+        gaps.append(current)
+        i += 1
+        current = ((3 ** i) - 1) // 2
+
+    return gaps[::-1]
+
+
+def shell_sort(arr: list):
+    size = len(arr)
+    gap_sequence = knuth_gaps(size)
+    for gap in gap_sequence:
+        for i in range(gap, size):
+            current = arr[i]
+            j = i
+            while current < arr[j-gap] and j >= gap:
+                yield arr, [i], [], [j-gap]
+                arr[j] = arr[j-gap]
+                j -= gap
+            arr[j] = current
+
+
 SORTS = {
     "Bubble Sort": bubble_sort,
     "Bogo Sort": bogo_sort,
@@ -187,5 +221,6 @@ SORTS = {
     "Insertion Sort": insertion_sort,
     "Binary Insertion Sort": binary_insertion_sort,
     "Selection Sort": selection_sort,
-    "Heap Sort": heap_sort
+    "Heap Sort": heap_sort,
+    "Shell Sort": shell_sort
 }

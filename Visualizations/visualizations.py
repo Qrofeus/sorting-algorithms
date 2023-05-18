@@ -3,9 +3,9 @@ import pygame
 import random
 
 # Constants
-WIDTH = 500
-HEIGHT = 300
-MAX_LENGTH = 100
+WIDTH = 800
+HEIGHT = 400
+MAX_LENGTH = 200
 MIN_WAIT, MAX_WAIT = 1, 100
 COLORS = {
     "background": (35, 35, 40),
