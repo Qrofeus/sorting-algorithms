@@ -249,7 +249,7 @@ def bucket_sort(arr: list[int], reverse: bool = False) -> list:
 
     # Iterate through the unsorted list, placing each element in the appropriate bucket, using the bucket_range
     for element in arr:
-        bucket_index = int(element // bucket_range)
+        bucket_index = min(bucket_count - 1, int(element // bucket_range))
         buckets[bucket_index].append(element)
 
     # Sort the individual buckets using any stable sorting algorithm
@@ -379,4 +379,39 @@ def heap_sort_mod(arr: list, reverse: bool = False) -> list:
         res.append(heapq.heappop(arr))
 
     # Reverse the list if the intended order is descending order
+    return arr if not reverse else arr[::-1]
+
+
+def get_knuth_gaps(size: int) -> list[int]:
+    """Returns a list of gaps, up-to the size of the list passed as the parameter"""
+    # Formula for generating the knuth-pratt gaps ->
+    # ((3 ** k) - 1) // 2 for kth element in the gap-sequence
+    i, gaps = 1, []
+    current = ((3 ** i) - 1) // 2
+    # Append the gaps until the gap-size exceeds the list size
+    while current < size:
+        gaps.append(current)
+        i += 1
+        current = ((3 ** i) - 1) // 2
+
+    # Reverse the gap-sequence, so that it goes from largest to smallest
+    return gaps[::-1]
+
+
+def shell_sort(arr: list, reverse: bool = False) -> list:
+    size = len(arr)
+    # Generate the gap sequence for the length of the unsorted list
+    gap_sequence = get_knuth_gaps(size)
+
+    for gap in gap_sequence:
+        # Perform normal insertion sort technique, while comparing elements gap-size apart from the current element
+        for mark_index in range(gap, size):
+            current = arr[mark_index]
+            j = mark_index
+            while current < arr[j - gap] and j >= gap:
+                arr[j] = arr[j - gap]
+                j -= gap
+            # Place the marked element after the intended element in reached when moving backwards
+            arr[j] = current
+
     return arr if not reverse else arr[::-1]
