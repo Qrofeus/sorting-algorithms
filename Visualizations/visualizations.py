@@ -5,7 +5,7 @@ import random
 # Constants
 WIDTH = 800
 HEIGHT = 400
-MAX_LENGTH = 200
+MAX_LENGTH = 100
 MIN_WAIT, MAX_WAIT = 1, 100
 COLORS = {
     "background": (35, 35, 40),
@@ -15,6 +15,10 @@ COLORS = {
     "highlight_3": (17, 138, 178),
     "sorted": (6, 214, 160)
 }
+
+
+def get_sorting_algorithms() -> list:
+    return list(SORTS.keys())
 
 
 def generate_process(algorithm: str) -> tuple:
@@ -61,7 +65,7 @@ def display_list(screen: pygame.Surface, arr: list[int] = None, highlight_1=None
             draw_bar(screen, arr, i, COLORS["highlight_3"], bar_width)
 
 
-def animate_sort(algorithm: str):
+def animate_sort(algorithm: str, wait_time: int = None):
     """Creates a pygame window to animate the given sorting algorithm
     Keyboard Interactions:
     1. Escape -> QUIT
@@ -73,7 +77,8 @@ def animate_sort(algorithm: str):
     if algorithm not in SORTS.keys():
         print(">> Invalid algorithm name...")
         exit()
-    wait_time = 100
+    if not wait_time or wait_time < 1:
+        wait_time = 100
 
     # Initialize PyGame
     pygame.init()

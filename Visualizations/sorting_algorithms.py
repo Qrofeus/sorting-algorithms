@@ -1,3 +1,4 @@
+from sys import setrecursionlimit
 import random
 
 
@@ -203,11 +204,46 @@ def shell_sort(arr: list):
         for i in range(gap, size):
             current = arr[i]
             j = i
-            while current < arr[j-gap] and j >= gap:
-                yield arr, [i], [], [j-gap]
-                arr[j] = arr[j-gap]
+            while current < arr[j - gap] and j >= gap:
+                yield arr, [i], [], [j - gap]
+                arr[j] = arr[j - gap]
                 j -= gap
             arr[j] = current
+
+
+# def merge(arr: list, start: int, mid: int, end: int):
+#     i = 0
+#     j = mid + 1
+#     merged = []
+#     while i <= mid and j <= end:
+#         if arr[i] < arr[j]:
+#             merged.append(arr[i])
+#             i += 1
+#         else:
+#             merged.append(arr[j])
+#             j += 1
+#     while i <= mid:
+#         merged.append(arr[i])
+#         i += 1
+#     while j <= end:
+#         merged.append(arr[j])
+#         j += 1
+#
+#     for k in range(len(merged)):
+#         arr[start + k] = merged[k]
+#         yield arr, [], [], []
+#
+#
+# def merge_sort(arr: list, start: int = 0, end: int = None):
+#     if not end:
+#         end = len(arr) - 1
+#     if end <= start:
+#         return
+#
+#     mid = start + ((end - start + 1) // 2) - 1
+#     yield from merge_sort(arr, start, mid)
+#     yield from merge_sort(arr, mid + 1, end)
+#     yield from merge(arr, start, mid, end)
 
 
 SORTS = {
@@ -223,4 +259,5 @@ SORTS = {
     "Selection Sort": selection_sort,
     "Heap Sort": heap_sort,
     "Shell Sort": shell_sort
+    # "Merge Sort": merge_sort
 }
