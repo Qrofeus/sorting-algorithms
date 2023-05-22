@@ -1,21 +1,12 @@
-from visualizations import animate_sort
+import visualizations
 
 
 def main():
-    # Available sorting algorithms:
-    # 1. Bubble Sort
-    # 2. Bogo Sort
-    # 3. Exchange Sort
-    # 4. Brick Sort
-    # 5. Comb Sort
-    # 6. Cocktail Sort
-    # 7. Gnome Sort
-    # 8. Insertion Sort
-    # 9. Binary Insertion Sort
-    # 10. Selection Sort
-    # 11. Heap Sort
-    # 12. Shell Sort
-    animate_sort("Binary Insertion Sort")
+    # sorts = visualizations.get_sorting_algorithms()
+    # print(sorts)
+    # ['Bubble Sort', 'Bogo Sort', 'Exchange Sort', 'Brick Sort', 'Comb Sort', 'Cocktail Sort', 'Gnome Sort',
+    #  'Insertion Sort', 'Binary Insertion Sort', 'Selection Sort', 'Heap Sort', 'Shell Sort']
+    visualizations.animate_sort("Shell Sort", wait_time=50)
 
 
 if __name__ == '__main__':
