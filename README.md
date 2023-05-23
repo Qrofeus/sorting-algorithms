@@ -142,9 +142,11 @@ def heap_sort(arr: list, reverse: bool = False) -> list:
 ```
 Considering the unsorted list as a [binary tree](https://www.geeksforgeeks.org/binary-tree-data-structure/), we create a [max-heap](https://www.geeksforgeeks.org/introduction-to-max-heap-data-structure/) from that binary tree. The maximum element from the heap gets placed at the start of the list-representation of that max-heap. Swapping that maximum element with the last element in the unsorted list, cements the correct position for the max element. Repeating this process again and again for the unsorted parts of the list, creates a growing sorted list from maximum to minimum value.\
 **Average Execution Time**: 0.056756 seconds
+
 ```python
 def heap_sort_mod(arr: list, reverse: bool = False) -> list:
 ```
+
 Using the [heapq](https://docs.python.org/3.11/library/heapq.html) module from the [Python Standard Library](https://docs.python.org/3.11/library/), the implementation of the heap_sort algorithm is increased by magnitudes. This is due to the fact that the modules inside the Python Standard Library are written in C programing language which is a much faster language than Python. Similar improvements can be achieved for the other sorting algorithms in this list, by using appropriate modules from the Python Standard Library.\
 **Average Execution Time (Heapq Module)**: 0.000005980 seconds
 
