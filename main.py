@@ -19,7 +19,7 @@ def timer_decor(func):
 
         # Displays the execution time with 9 decimal place precision. Effective display of nanoseconds
         # Increase the precision by change the x value in --> :.xf
-        print(f"Execution time: {execution_time:.9f}s")
+        # print(f"Execution time: {execution_time:.9f}s")
         return result
 
     return wrapper_func
@@ -29,14 +29,17 @@ def timer_decor(func):
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
     try:
-        sorts.counting_sort(arr=arr)
+        # print(sorts.shell_sort(arr=arr, reverse=False))
+        sorts.bubble_sort(arr=arr)
     except RecursionError:
         print(RecursionError)
         exit(1)
 
 
 def main():
-    array = list(range(1_000))
+    # array = list(range(10))
+    # repeat = 10
+    array = list(range(10_000))
     repeat = 1_000
     for _ in range(repeat):
         random.shuffle(array)

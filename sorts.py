@@ -1,4 +1,5 @@
 import random
+import heapq
 
 
 class NegativeValuesPresent(Exception):
@@ -11,24 +12,20 @@ def bubble_sort(arr: list, reverse: bool = False) -> list:
     Order can be specified using parameter -reverse-
     Passing boolean True to -reverse- parameter returns the list sorted in descending order
     :param arr: list - unsorted list
-    :param reverse: bool - True if descending order is intended, otherwise False
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False
     :return: list - Sorted in intended order
     """
     # Access each element in list
     for i in range(len(arr)):
         # Compare list elements until last iteration position
-        for j in range(0, len(arr) - 2 - i):
-            # Check whether ascending or descending order is required
-            if reverse:
-                # Compare two adjacent elements
-                if arr[j] < arr[j + 1]:
-                    # Swap elements they aren't in intended order
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
-            else:
-                # comparison for less-than changes to greater-than when sorting for ascending order
-                if arr[j] > arr[j + 1]:
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
-    return arr
+        for j in range(0, len(arr) - 1 - i):
+            # If current element is greater than the next element in list, the elements are swapped
+            if arr[j] > arr[j + 1]:
+                # Swap elements they aren't in intended order
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    # Because reversing a list in python is a single line code, returning the list in intended order
+    # can be tackled at the end
+    return arr if not reverse else arr[::-1]
 
 
 def selection_sort(arr: list, reverse: bool = False) -> list:
@@ -37,7 +34,7 @@ def selection_sort(arr: list, reverse: bool = False) -> list:
     Order can be specified using parameter -reverse-
     Passing boolean True to -reverse- parameter returns the list sorted in descending order
     :param arr: list - unsorted list
-    :param reverse: bool - True if descending order is intended, otherwise False
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False
     :return: list - Sorted in intended order
     """
     for i in range(len(arr) - 1):
@@ -45,21 +42,14 @@ def selection_sort(arr: list, reverse: bool = False) -> list:
         # Maximum in case of descending order sort
         target_index = i
         for j in range(i + 1, len(arr)):
-            if reverse:
-                # Look for the maximum value in the unsorted list
-                if arr[j] > arr[target_index]:
-                    # The value at index j is larger than target_index
-                    # Therefore, update target_index to j
-                    target_index = j
-            else:
-                # Look for the minimum value in the unsorted list
-                if arr[j] < arr[target_index]:
-                    # The value at index j is smaller than target_index
-                    # Therefore, update target_index to j
-                    target_index = j
+            # Look for the minimum value in the unsorted list
+            if arr[j] < arr[target_index]:
+                # The value at index j is smaller than target_index
+                # Therefore, update target_index to j
+                target_index = j
         # Swap the elements at the start of the unsorted list 'i' and 'target_index'
         arr[i], arr[target_index] = arr[target_index], arr[i]
-    return arr
+    return arr if not reverse else arr[::-1]
 
 
 def insertion_sort(arr: list, reverse: bool = False) -> list:
@@ -68,7 +58,7 @@ def insertion_sort(arr: list, reverse: bool = False) -> list:
         Order can be specified using parameter -reverse-
         Passing boolean True to -reverse- parameter returns the list sorted in descending order
         :param arr: list - unsorted list
-        :param reverse: bool - True if descending order is intended, otherwise False
+        :param reverse: (optional) bool - True if descending order is intended, otherwise False
         :return: list - Sorted in intended order
     """
     # First element (single element) will be sorted
@@ -80,19 +70,13 @@ def insertion_sort(arr: list, reverse: bool = False) -> list:
         step_index = mark_index - 1
         # Compare elements to the left until a smaller element is found
         # Start from step_index reduce by 1 with each iteration until -1 to avoid looping back to end of list
-        if reverse:
-            # For descending order, check for elements until an element larger than marked is reached
-            while step_index >= 0 and marked > arr[step_index]:
-                arr[step_index + 1] = arr[step_index]
-                step_index -= 1
-        else:
-            # For descending order, check for elements until an element larger than marked is reached
-            while step_index >= 0 and marked < arr[step_index]:
-                arr[step_index + 1] = arr[step_index]
-                step_index -= 1
+        # For ascending order, check for elements until an element larger than marked is reached
+        while step_index >= 0 and marked < arr[step_index]:
+            arr[step_index + 1] = arr[step_index]
+            step_index -= 1
         # Place the marked element after the intended element in reached when moving backwards
         arr[step_index + 1] = marked
-    return arr
+    return arr if not reverse else arr[::-1]
 
 
 def merge_sort(arr: list, reverse: bool = False) -> list | None:
@@ -105,7 +89,7 @@ def merge_sort(arr: list, reverse: bool = False) -> list | None:
     Order can be specified using parameter -reverse-
     Passing boolean True to -reverse- parameter returns the list sorted in descending order
     :param arr: list - unsorted list
-    :param reverse: bool - True if descending order is intended, otherwise False
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False
     :return: list - Sorted in intended order
     """
     if len(arr) <= 1:
@@ -124,24 +108,13 @@ def merge_sort(arr: list, reverse: bool = False) -> list | None:
     i = j = k = 0
     # k index will be used for merging into original list
     while i < len(left_list) and j < len(right_list):
-        # While merging the two lists, check if intended order if descending
-        # change the comparisons performed accordingly
-        if reverse:
-            if left_list[i] >= right_list[j]:
-                # Using "greater than or equal" preserves original sequence in-case of matching values
-                arr[k] = left_list[i]
-                i += 1
-            else:
-                arr[k] = right_list[j]
-                j += 1
+        if left_list[i] <= right_list[j]:
+            # Using "less than or equal" preserves original sequence in-case of matching values
+            arr[k] = left_list[i]
+            i += 1
         else:
-            if left_list[i] <= right_list[j]:
-                # Using "less than or equal" preserves original sequence in-case of matching values
-                arr[k] = left_list[i]
-                i += 1
-            else:
-                arr[k] = right_list[j]
-                j += 1
+            arr[k] = right_list[j]
+            j += 1
         k += 1
     # Add the remaining elements in left_list or right_list to original after either one runs-out
     while i < len(left_list):
@@ -153,17 +126,16 @@ def merge_sort(arr: list, reverse: bool = False) -> list | None:
         j += 1
         k += 1
 
-    return arr
+    return arr if not reverse else arr[::-1]
 
 
-def partition(arr: list, reverse: bool = False, start_index: int = 0, end_index: int = None) -> int:
+def partition(arr: list, start_index: int = 0, end_index: int = None) -> int:
     """
     This function will select a random element as pivot in the given range for the list, and rearrange the list having
     all elements smaller than the pivot to it's left and all elements larger to it's right.
     :param arr: list
-    :param reverse: bool - True if descending order is intended, else False
-    :param start_index: starting index of the range
-    :param end_index: last index of the range
+    :param start_index: (optional) starting index of the range
+    :param end_index: (optional) last index of the range
     :return: int - index of pivot element
     """
     # Choose a random element from the list as pivot_el and swap it with the last element in the list
@@ -178,19 +150,11 @@ def partition(arr: list, reverse: bool = False, start_index: int = 0, end_index:
 
     # Traverse through all element in the list section, and compare each element with pivot
     for j in range(start_index, end_index):
-        # Check whether intended order is ascending/descending
-        if not reverse:
-            if arr[j] <= pivot_el:
-                # If element smaller than pivot_element is found swap it with greater element pointed to by 'i'
-                # Increment 'i' before swap
-                i += 1
-                arr[i], arr[j] = arr[j], arr[i]
-        else:
-            if arr[j] >= pivot_el:
-                # If element greater than pivot_element is found swap it with greater element pointed to by 'i'
-                # Increment 'i' before swap
-                i += 1
-                arr[i], arr[j] = arr[j], arr[i]
+        if arr[j] <= pivot_el:
+            # If element smaller than pivot_element is found swap it with greater element pointed to by 'i'
+            # Increment 'i' before swap
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
     # Swap pivot element with greater/smaller element pointed by 'i'
     arr[i + 1], arr[end_index] = arr[end_index], arr[i + 1]
     return i + 1
@@ -204,9 +168,9 @@ def quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index
     Order can be specified using parameter -reverse-
     Passing boolean True to -reverse- parameter returns the list sorted in descending order.
     :param arr: list - unsorted list.
-    :param reverse: bool - True if descending order is intended, otherwise False.
-    :param start_index: int - first index of list.
-    :param end_index: int - last index of list.
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False.
+    :param start_index: (optional) int - first index of list.
+    :param end_index: (optional) int - last index of list.
     :return: list - sorted in intended order
     """
     # This Quick sort implementation does not have a merge functionality that merges two sections into a third
@@ -221,13 +185,13 @@ def quick_sort(arr: list, reverse: bool = False, start_index: int = 0, end_index
         return
 
     # The partition functionality is declared in a separate function, to avoid "maximum recursion depth"
-    pivot_index = partition(arr=arr, reverse=reverse, start_index=start_index, end_index=end_index)
+    pivot_index = partition(arr=arr, start_index=start_index, end_index=end_index)
 
     # Recursively call the sorting function on the left and right section of the pivot_index
     quick_sort(arr=arr, reverse=reverse, start_index=start_index, end_index=pivot_index - 1)
     quick_sort(arr=arr, reverse=reverse, start_index=pivot_index + 1, end_index=end_index)
 
-    return arr
+    return arr if not reverse else arr[::-1]
 
 
 def counting_sort(arr: list[int], reverse: bool = False) -> list:
@@ -236,7 +200,7 @@ def counting_sort(arr: list[int], reverse: bool = False) -> list:
     Order can be specified using parameter -reverse-. Passing boolean True to -reverse- parameter returns the list
     sorted in descending order
     :param arr: list - unsorted list
-    :param reverse: bool - True if descending order is intended, otherwise False
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False
     :return: list - Sorted in intended order
     """
     # Find minimum and maximum values in the list
@@ -258,15 +222,12 @@ def counting_sort(arr: list[int], reverse: bool = False) -> list:
 
     # Reset the list 'arr'
     arr = []
-    # Check for the intended order
-    # For ascending order sorting, iterate through the count_list from left to right
-    # For descending order sorting, iterate through the count_list from right to left
-    list_iterator = reversed(list(enumerate(count_list))) if reverse else enumerate(count_list)
+    list_iterator = enumerate(count_list)
     for index, value in list_iterator:
         # Add the elements corresponding to the index values in count_list to the list 'arr'
         # Repeatedly add the index value for the count associated with that index
         arr += [(index + offset)] * value
-    return arr
+    return arr if not reverse else arr[::-1]
 
 
 def bucket_sort(arr: list[int], reverse: bool = False) -> list:
@@ -275,7 +236,7 @@ def bucket_sort(arr: list[int], reverse: bool = False) -> list:
     Order can be specified using parameter -reverse-. Passing boolean True to -reverse- parameter returns the list
     sorted in descending order
     :param arr: list - unsorted list
-    :param reverse: bool - True if descending order is intended, otherwise False
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False
     :return: list - Sorted in intended order
     """
     bucket_count = 10
@@ -288,7 +249,7 @@ def bucket_sort(arr: list[int], reverse: bool = False) -> list:
 
     # Iterate through the unsorted list, placing each element in the appropriate bucket, using the bucket_range
     for element in arr:
-        bucket_index = int(element // bucket_range)
+        bucket_index = min(bucket_count - 1, int(element // bucket_range))
         buckets[bucket_index].append(element)
 
     # Sort the individual buckets using any stable sorting algorithm
@@ -302,13 +263,12 @@ def bucket_sort(arr: list[int], reverse: bool = False) -> list:
     return sum(buckets, [])
 
 
-def radix_counting(arr: list[str], unit_place: int, reverse: bool = False) -> list:
+def radix_counting(arr: list[str], unit_place: int) -> list:
     """
     Separates the elements in to sub-list based on the current unit-place passed through the 'unit_place' parameter.
     Merges the sub-lists back together in the intended order and returns the list sorted for that unit-place
     :param arr: list[str] - unsorted list mapped from int to str with leading zeroes
     :param unit_place: int - current unit-place to be considered from right
-    :param reverse: bool - True if descending order is intended, otherwise False
     :return: list[str] - sorted for up-till the current unit-place
     """
     # Create 10 sub-lists for each of the possible numerical values (0-9)
@@ -318,10 +278,6 @@ def radix_counting(arr: list[str], unit_place: int, reverse: bool = False) -> li
     # based on the value at the current unit-place
     for num in arr:
         unit_counts[int(num[-unit_place])].append(num)
-
-    # When merging the sub-lists check for the intended order, reverse the buckets if intended order is descending order
-    if reverse:
-        unit_counts = unit_counts[::-1]
 
     # Merge the sub-lists together to get the list sorted for current unit_place
     arr = [num for bucket in unit_counts for num in bucket]
@@ -334,7 +290,7 @@ def radix_sort(arr: list[int], reverse: bool = False) -> list:
     Order can be specified using parameter -reverse-. Passing boolean True to -reverse- parameter returns the list
     sorted in descending order
     :param arr: list - unsorted list
-    :param reverse: bool - True if descending order is intended, otherwise False
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False
     :return: list - Sorted in intended order
     """
     # To make sure this algorithm works as intended, the elements inside the list should be positive integers
@@ -350,13 +306,112 @@ def radix_sort(arr: list[int], reverse: bool = False) -> list:
     # will require dividing element in the list with (10^current-unit) each time it is to be used
     arr = [str(num).zfill(units) for num in arr]
     # Starting from right rearrange the elements in 10 sub-lists (0-9)
-    for unit in range(1, units+1):
-        arr = radix_counting(arr=arr, unit_place=unit, reverse=reverse)
+    for unit in range(1, units + 1):
+        arr = radix_counting(arr=arr, unit_place=unit)
 
     # Convert the list back to int values
     arr = list(map(int, arr))
-    return arr
+    return arr if not reverse else arr[::-1]
 
-# Acknowledgement:
-# Adding the reverse check inside the for loops for iterating over the lists, will result in more comparison checks
-# performed, rather than if two entirely separate code blocks are written for ascending and descending sorts
+
+def heapify(arr: list, end: int, root: int) -> None:
+    """Generates a binary max-heap structure in a list representation for the given root node from the list"""
+    # Get the left and right children of the current root element
+    largest = root
+    left = 2 * root + 1
+    right = 2 * root + 2
+
+    # Find the largest element in this subtree
+    if left < end and arr[largest] < arr[left]:
+        largest = left
+
+    if right < end and arr[largest] < arr[right]:
+        largest = right
+
+    # Place the largest element at the root
+    if largest != root:
+        arr[root], arr[largest] = arr[largest], arr[root]
+        # Repeat the heapify process to get the largest element from the subtrees
+        heapify(arr, end, largest)
+
+
+def heap_sort(arr: list, reverse: bool = False) -> list:
+    """
+    Uses heap-sort algorithm to sort the input list in intended order. Makes use of the binary-tree data structure to
+    create max-heap structure to sort the elements inside the list.
+    :param arr: list - unsorted list
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False
+    :return: list - Sorted in intended order
+    """
+    # Because the length of the list is required multiple times, using a variable to store the length
+    # eliminates repeated calls for the same required value
+    size = len(arr)
+    # Build max/min heap according to the intended order
+    for i in range(size // 2, -1, -1):
+        heapify(arr, size, i)
+
+    # Starting from last element, place the elements in the intended order using max/min heaps
+    for i in range(size - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        # Heapify root element
+        heapify(arr, i, 0)
+
+    return arr if not reverse else arr[::-1]
+
+
+def heap_sort_mod(arr: list, reverse: bool = False) -> list:
+    """
+    Using python module 'heapq' to achieve heap data structure, this function uses heap-sort algorithm to sort the input
+    list in intended order. Makes use of the binary-tree data structure to create max-heap structure to sort the
+    elements inside the list.
+    This function does not provide in-place sorting for the input list. A new list containing the sorted elements is
+    returned by this function.
+    Python documentation: https://docs.python.org/3/library/heapq.html
+    :param arr: list - unsorted list
+    :param reverse: (optional) bool - True if descending order is intended, otherwise False
+    :return: list - ** New ** sorted in intended order (No in-place sorting)
+    """
+    # Transform list x into a heap, in-place, in linear time
+    heapq.heapify(arr)
+    res = []
+    while arr:
+        # Pop and return the smallest item from the heap, maintaining the heap invariant.
+        res.append(heapq.heappop(arr))
+
+    # Reverse the list if the intended order is descending order
+    return arr if not reverse else arr[::-1]
+
+
+def get_knuth_gaps(size: int) -> list[int]:
+    """Returns a list of gaps, up-to the size of the list passed as the parameter"""
+    # Formula for generating the knuth-pratt gaps ->
+    # ((3 ** k) - 1) // 2 for kth element in the gap-sequence
+    i, gaps = 1, []
+    current = ((3 ** i) - 1) // 2
+    # Append the gaps until the gap-size exceeds the list size
+    while current < size:
+        gaps.append(current)
+        i += 1
+        current = ((3 ** i) - 1) // 2
+
+    # Reverse the gap-sequence, so that it goes from largest to smallest
+    return gaps[::-1]
+
+
+def shell_sort(arr: list, reverse: bool = False) -> list:
+    size = len(arr)
+    # Generate the gap sequence for the length of the unsorted list
+    gap_sequence = get_knuth_gaps(size)
+
+    for gap in gap_sequence:
+        # Perform normal insertion sort technique, while comparing elements gap-size apart from the current element
+        for mark_index in range(gap, size):
+            current = arr[mark_index]
+            j = mark_index
+            while current < arr[j - gap] and j >= gap:
+                arr[j] = arr[j - gap]
+                j -= gap
+            # Place the marked element after the intended element in reached when moving backwards
+            arr[j] = current
+
+    return arr if not reverse else arr[::-1]
