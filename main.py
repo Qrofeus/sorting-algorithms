@@ -29,7 +29,7 @@ def timer_decor(func):
 def sorting_function(arr: list = None):
     # Change the sorts.* function call with your intended sorting algorithm
     try:
-        # print(sorts.shell_sort(arr=arr, reverse=False))
+        # print(sorts.bubble_sort(arr=arr, reverse=False))
         sorts.bubble_sort(arr=arr)
     except RecursionError:
         print(RecursionError)

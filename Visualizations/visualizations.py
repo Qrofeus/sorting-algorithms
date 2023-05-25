@@ -3,9 +3,8 @@ import pygame
 import random
 
 # Constants
-WIDTH = 800
-HEIGHT = 400
-MAX_LENGTH = 100
+HEIGHT, WIDTH = 400, 800
+LIST_SIZE = 100
 MIN_WAIT, MAX_WAIT = 1, 100
 COLORS = {
     "background": (35, 35, 40),
@@ -23,7 +22,7 @@ def get_sorting_algorithms() -> list:
 
 def generate_process(algorithm: str) -> tuple:
     """Creates a random list of integers and a generator object for the specified sorting function"""
-    arr = random.sample(range(1, MAX_LENGTH + 1), MAX_LENGTH)
+    arr = random.sample(range(1, LIST_SIZE + 1), LIST_SIZE)
     process = SORTS[algorithm](arr)
     return arr, process
 
@@ -67,7 +66,7 @@ def display_list(screen: pygame.Surface, arr: list[int] = None, highlight_1=None
 
 def animate_sort(algorithm: str, wait_time: int = None):
     """Creates a pygame window to animate the given sorting algorithm
-    Keyboard Interactions:
+    Keyboard Interactions:\n
     1. Escape -> QUIT
     2. Enter/Return -> Re-shuffle and restart animation
     3. Space -> Pause animation
@@ -103,7 +102,7 @@ def animate_sort(algorithm: str, wait_time: int = None):
             if arr:
                 display_list(screen, arr, highlight_1, highlight_2, highlight_3)
             else:
-                arr = list(range(1, MAX_LENGTH + 1))
+                arr = list(range(1, LIST_SIZE + 1))
                 display_list(screen, arr, list_sorted=True)
 
             # Add algorithm text-box in top-left

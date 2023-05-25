@@ -6,7 +6,7 @@ def main():
     # print(sorts)
     # ['Bubble Sort', 'Bogo Sort', 'Exchange Sort', 'Brick Sort', 'Comb Sort', 'Cocktail Sort', 'Gnome Sort',
     #  'Insertion Sort', 'Binary Insertion Sort', 'Selection Sort', 'Heap Sort', 'Shell Sort']
-    visualizations.animate_sort("Shell Sort", wait_time=50)
+    visualizations.animate_sort(algorithm="Shell Sort", wait_time=50)
 
 
 if __name__ == '__main__':

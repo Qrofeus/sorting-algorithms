@@ -1,4 +1,3 @@
-from sys import setrecursionlimit
 import random
 
 
@@ -177,15 +176,6 @@ def heap_sort(arr: list):
         yield from heapify(arr, i, 0)
 
 
-# def hibbard_gaps(size: int) -> list[int]:
-#     current, gaps = 2, []
-#     while current < size:
-#         gaps.append(current - 1)
-#         current = current * 2
-#
-#     return gaps[::-1]
-
-
 def knuth_gaps(size: int) -> list[int]:
     i, gaps = 1, []
     current = ((3 ** i) - 1) // 2
@@ -211,41 +201,6 @@ def shell_sort(arr: list):
             arr[j] = current
 
 
-# def merge(arr: list, start: int, mid: int, end: int):
-#     i = 0
-#     j = mid + 1
-#     merged = []
-#     while i <= mid and j <= end:
-#         if arr[i] < arr[j]:
-#             merged.append(arr[i])
-#             i += 1
-#         else:
-#             merged.append(arr[j])
-#             j += 1
-#     while i <= mid:
-#         merged.append(arr[i])
-#         i += 1
-#     while j <= end:
-#         merged.append(arr[j])
-#         j += 1
-#
-#     for k in range(len(merged)):
-#         arr[start + k] = merged[k]
-#         yield arr, [], [], []
-#
-#
-# def merge_sort(arr: list, start: int = 0, end: int = None):
-#     if not end:
-#         end = len(arr) - 1
-#     if end <= start:
-#         return
-#
-#     mid = start + ((end - start + 1) // 2) - 1
-#     yield from merge_sort(arr, start, mid)
-#     yield from merge_sort(arr, mid + 1, end)
-#     yield from merge(arr, start, mid, end)
-
-
 SORTS = {
     "Bubble Sort": bubble_sort,
     "Bogo Sort": bogo_sort,
@@ -259,5 +214,4 @@ SORTS = {
     "Selection Sort": selection_sort,
     "Heap Sort": heap_sort,
     "Shell Sort": shell_sort
-    # "Merge Sort": merge_sort
 }
