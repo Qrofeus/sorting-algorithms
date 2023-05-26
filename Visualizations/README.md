@@ -78,10 +78,6 @@ Below are all the animations for the implemented sorting algorithms:
 
 ![Exchange Sort - Animation](assets/gifs/Exchange%20Sort.gif)
 
-## Gnome Sort:
-
-![Gnome Sort - Animation](assets/gifs/Gnome%20Sort.gif)
-
 ## Comb Sort:
 
 ![Comb Sort - Animation](assets/gifs/Comb%20Sort.gif)
@@ -89,6 +85,10 @@ Below are all the animations for the implemented sorting algorithms:
 ## Cocktail Sort:
 
 ![Cocktail Sort - Animation](assets/gifs/Cocktail%20Sort.gif)
+
+## Gnome Sort:
+
+![Gnome Sort - Animation](assets/gifs/Gnome%20Sort.gif)
 
 ## Insertion Sort:
 
