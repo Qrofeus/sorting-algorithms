@@ -94,7 +94,7 @@ def heap_sort(arr: list) -> list:
    - Best Case Complexity: `O(nlog n)`
    - Average Case Complexity: `O(nlog n)`\
    The height of a complete binary tree containing `n` elements is `log n`. In worst case, we will need to move an element from the root to the leaf node making a multiple of `log(n)` comparisons and swaps. For the first stage in the algorithm, build-max-heap, we do that for `n/2` elements so the worst case complexity of the build_heap step is `n/2*log n ~ nlog n`.\
-   During the sorting part, we swap the root element and apply `heapify()` again to the unsorted part, repeating for all the `n` elements in the list. Again resulting in a time complexity of `nlog n`.
+   During the sorting part, we swap the root element and apply `heapify()` again to the unsorted part, repeating for all the `n` elements in the list. Again resulting in a time complexity of `nlog n`.\
    The algorithm time complexity, combining the build-max-heap and the sorting part, resulting in the order of `nlog n`.
 2. **Space Complexity**: `O(1)`
 

@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -179,7 +180,7 @@ def heap_sort(arr: list):
 def knuth_gaps(size: int) -> list[int]:
     i, gaps = 1, []
     current = ((3 ** i) - 1) // 2
-    while current < size:
+    while current < math.ceil(size/3):
         gaps.append(current)
         i += 1
         current = ((3 ** i) - 1) // 2

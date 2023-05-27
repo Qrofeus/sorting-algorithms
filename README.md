@@ -234,12 +234,10 @@ gap sequence [(A003462)](https://oeis.org/A003462).\
 #
 ## Comments:
 
-1. For recursive algorithms, for larger lists there is a chance that during execution, maximum-recursion-depth (in
-   Python) may be reached.
+1. For recursive algorithms, for larger lists there is a chance that during execution, maximum-recursion-depth (in Python) may be reached.
     - Python has a default maximum-recursion-depth of 1000. If a function exceeds this limit `RecursionError` is raised.
     - Although not advised, this limit can be increased using `sys.setrecursionlimit(__limit=n)` function.
-2. Python works with references when passing data structures as parameters to a function. Therefore, the implementations
-   of the sorting algorithms work as in-place sorting functions. Despite that, all the sorting functions in this
-   implementation return the sorted list explicitly (to be used if ever needed).
+2. Python works with reference values when passing mutable data structures like lists (that all the sorting functions in this implementation use) as parameters to a function. Therefore, the implementations of the sorting algorithms generally work as in-place sorting functions. Despite that, all the sorting functions in this implementation return the sorted list explicitly (to be used if ever needed).
     - If you intend to stop Python from modifying the original list, when passing the list as a parameter to the sorting
       function use `copy.deepcopy(arr)` function. [Python Documentation](https://docs.python.org/3/library/copy.html)
+    - Official Python documentation for [mutable](https://docs.python.org/3/glossary.html#term-mutable) and [immutable](https://docs.python.org/3/glossary.html#term-immutable) aren't very helpful, use the [RealPython article](https://realpython.com/python-mutable-vs-immutable-types/) for better understanding.

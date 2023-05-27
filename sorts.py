@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -358,14 +359,14 @@ def heap_sort(arr: list, reverse: bool = False) -> list:
     return arr if not reverse else arr[::-1]
 
 
-def get_knuth_pratt_gaps(size: int) -> list[int]:
+def get_knuth_gaps(size: int) -> list[int]:
     """Returns a list of gaps, up-to the size of the list passed as the parameter"""
-    # Formula for generating the knuth-pratt gaps ->
+    # Formula for generating the knuth gap sequence ->
     # ((3 ** k) - 1) // 2 for kth element in the gap-sequence
     i, gaps = 1, []
     current = ((3 ** i) - 1) // 2
     # Append the gaps until the gap-size exceeds the list size
-    while current < size:
+    while current < math.ceil(size/3):
         gaps.append(current)
         i += 1
         current = ((3 ** i) - 1) // 2
@@ -376,15 +377,15 @@ def get_knuth_pratt_gaps(size: int) -> list[int]:
 
 def shell_sort(arr: list, reverse: bool = False) -> list:
     """
-    A variation on insertion-sorting algorithm, shell sort compares elements with varying gaps between the elements. These gaps decided by the Knuth-Pratt sequence, decrease with each iteration, ironing out the sorted list.
-    Knuth-Pratt sequence: https://en.wikipedia.org/wiki/Shellsort#Gap_sequences, https://oeis.org/A003462
+    A variation on insertion-sorting algorithm, shell sort compares elements with varying gaps between the elements. These gaps decided by the Knuth sequence, decrease with each iteration, ironing out the sorted list.
+    Knuth sequence: https://en.wikipedia.org/wiki/Shellsort#Gap_sequences, https://oeis.org/A003462
     :param arr: list - unsorted list
     :param reverse: (optional) bool - True if descending order is intended, otherwise False
     :return: list - sorted in intended order
     """
     size = len(arr)
     # Generate the gap sequence for the length of the unsorted list
-    gap_sequence = get_knuth_pratt_gaps(size)
+    gap_sequence = get_knuth_gaps(size)
 
     for gap in gap_sequence:
         # Perform normal insertion sort technique, while comparing elements gap-size apart from the current element
